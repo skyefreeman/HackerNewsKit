@@ -13,7 +13,8 @@
 		EE2643931BC32562002C4F8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2643911BC32562002C4F8A /* Main.storyboard */; };
 		EE2643951BC32562002C4F8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE2643941BC32562002C4F8A /* Assets.xcassets */; };
 		EE2643981BC32562002C4F8A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2643961BC32562002C4F8A /* LaunchScreen.storyboard */; };
-		EE2643A31BC32562002C4F8A /* HackerNewsKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2643A21BC32562002C4F8A /* HackerNewsKitTests.m */; };
+		EE2643AF1BC32824002C4F8A /* HNItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2643AE1BC32824002C4F8A /* HNItemTests.m */; settings = {ASSET_TAGS = (); }; };
+		EE2643B21BC3285F002C4F8A /* HNItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2643B11BC3285F002C4F8A /* HNItem.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +39,10 @@
 		EE2643971BC32562002C4F8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EE2643991BC32562002C4F8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE26439E1BC32562002C4F8A /* HackerNewsKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HackerNewsKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EE2643A21BC32562002C4F8A /* HackerNewsKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HackerNewsKitTests.m; sourceTree = "<group>"; };
 		EE2643A41BC32562002C4F8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EE2643AE1BC32824002C4F8A /* HNItemTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNItemTests.m; sourceTree = "<group>"; };
+		EE2643B01BC3285F002C4F8A /* HNItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNItem.h; sourceTree = "<group>"; };
+		EE2643B11BC3285F002C4F8A /* HNItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,15 +84,9 @@
 		EE2643871BC32562002C4F8A /* HackerNewsKit */ = {
 			isa = PBXGroup;
 			children = (
-				EE26438B1BC32562002C4F8A /* AppDelegate.h */,
-				EE26438C1BC32562002C4F8A /* AppDelegate.m */,
-				EE26438E1BC32562002C4F8A /* ViewController.h */,
-				EE26438F1BC32562002C4F8A /* ViewController.m */,
-				EE2643911BC32562002C4F8A /* Main.storyboard */,
-				EE2643941BC32562002C4F8A /* Assets.xcassets */,
-				EE2643961BC32562002C4F8A /* LaunchScreen.storyboard */,
-				EE2643991BC32562002C4F8A /* Info.plist */,
-				EE2643881BC32562002C4F8A /* Supporting Files */,
+				EE2643AD1BC325FB002C4F8A /* Example */,
+				EE2643B01BC3285F002C4F8A /* HNItem.h */,
+				EE2643B11BC3285F002C4F8A /* HNItem.m */,
 			);
 			path = HackerNewsKit;
 			sourceTree = "<group>";
@@ -105,10 +102,26 @@
 		EE2643A11BC32562002C4F8A /* HackerNewsKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				EE2643A21BC32562002C4F8A /* HackerNewsKitTests.m */,
 				EE2643A41BC32562002C4F8A /* Info.plist */,
+				EE2643AE1BC32824002C4F8A /* HNItemTests.m */,
 			);
 			path = HackerNewsKitTests;
+			sourceTree = "<group>";
+		};
+		EE2643AD1BC325FB002C4F8A /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				EE26438B1BC32562002C4F8A /* AppDelegate.h */,
+				EE26438C1BC32562002C4F8A /* AppDelegate.m */,
+				EE26438E1BC32562002C4F8A /* ViewController.h */,
+				EE26438F1BC32562002C4F8A /* ViewController.m */,
+				EE2643911BC32562002C4F8A /* Main.storyboard */,
+				EE2643961BC32562002C4F8A /* LaunchScreen.storyboard */,
+				EE2643991BC32562002C4F8A /* Info.plist */,
+				EE2643941BC32562002C4F8A /* Assets.xcassets */,
+				EE2643881BC32562002C4F8A /* Supporting Files */,
+			);
+			name = Example;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE2643B21BC3285F002C4F8A /* HNItem.m in Sources */,
 				EE2643901BC32562002C4F8A /* ViewController.m in Sources */,
 				EE26438D1BC32562002C4F8A /* AppDelegate.m in Sources */,
 				EE26438A1BC32562002C4F8A /* main.m in Sources */,
@@ -221,7 +235,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE2643A31BC32562002C4F8A /* HackerNewsKitTests.m in Sources */,
+				EE2643AF1BC32824002C4F8A /* HNItemTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
