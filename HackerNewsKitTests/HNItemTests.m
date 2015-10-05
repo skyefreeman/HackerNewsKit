@@ -42,4 +42,16 @@
     XCTAssertEqual(item.ID, @"123",@"An HNItem needs to have an ID");
 }
 
+- (void)testItemCanBeSavedInUserDefaults {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:item];
+    [defaults setObject:data forKey:@"item"];
+    [defaults synchronize];
+    
+    NSData *savedData = [defaults objectForKey:@"item"];
+    HNItem *savedItem = [NSKeyedUnarchiver unarchiveObjectWithData:savedData];
+    
+    XCTAssertTrue([item.ID isEqualToString:savedItem.ID], @"HNItem should be NSCoding compliant.");
+}
+
 @end

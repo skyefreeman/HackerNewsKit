@@ -8,27 +8,27 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HNItem : NSObject 
+@interface HNItem : NSObject <NSCoding>
 
 - (instancetype)initWithID:(NSString*)ID;
 
-@property (nonatomic) NSString *ID;
+@property (copy) NSString *ID;
 
-@property (nonatomic, copy) NSString *type;
-@property (nonatomic, copy) NSString *by;
-@property (nonatomic, copy) NSString *text;
-@property (nonatomic, copy) NSString *url;
-@property (nonatomic, copy) NSString *title;
+@property (copy) NSString *type;
+@property (copy) NSString *by;
+@property (copy) NSString *text;
+@property (copy) NSString *url;
+@property (copy) NSString *title;
 
-@property (nonatomic) NSInteger time;
-@property (nonatomic) NSInteger parent;
-@property (nonatomic) NSInteger descendants;
-@property (nonatomic) NSInteger score;
+@property NSInteger time;
+@property NSInteger parent;
+@property NSInteger descendants;
+@property NSInteger score;
 
-@property (nonatomic) NSArray *kids;
-@property (nonatomic) NSArray *parts;
+@property NSArray *kids;
+@property NSArray *parts;
 
-@property (nonatomic) BOOL deleted;
-@property (nonatomic) BOOL dead;
+@property (getter=isDeleted) BOOL deleted;
+@property (getter=isDead) BOOL dead;
 
 @end
