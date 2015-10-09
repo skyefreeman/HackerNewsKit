@@ -7,8 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+@class HNItem;
 
 @protocol HackerNewsManagerDelegate <NSObject>
 - (void)fetchingTopStoriesFailedWithError:(NSError*)error;
-- (void)didReceiveItems:(NSArray*)items;
+- (void)fetchingItemFailedWithError:(NSError*)error;
+
+- (void)didReceiveTopStories:(NSArray*)topStories;
+- (void)didReceiveItem:(HNItem*)item;
 @end

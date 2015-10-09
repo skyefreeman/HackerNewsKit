@@ -13,8 +13,16 @@
     self.fetchError = error;
 }
 
-- (void)didReceiveItems:(NSArray *)items {
-    self.receivedItems = items;
+- (void)fetchingItemFailedWithError:(NSError *)error {
+    self.fetchError = error;
+}
+
+- (void)didReceiveTopStories:(NSArray *)topStories {
+    self.receivedTopStories = topStories;
+}
+
+- (void)didReceiveItem:(HNItem *)item {
+    self.receivedItem = item;
 }
 
 @end

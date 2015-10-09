@@ -10,4 +10,5 @@
 
 @interface HackerNewsCommunicator : NSObject
 - (void)fetchTopStories;
+- (void)fetchItemForID:(NSString*)ID;
 @end

@@ -9,12 +9,20 @@
 #import "FakeHNItemBuilder.h"
 
 @implementation FakeHNItemBuilder
-- (NSArray*)itemFromJSON:(NSString *)objectNotation error:(NSError **)error {
+- (HNItem*)itemFromJSON:(NSString*)objectNotation error:(NSError **)error {
     self.JSON = objectNotation;
     if (error) {
         *error = _errorToSet;
     }
     
+    return self.itemToReturn;
+}
+
+- (NSArray*)itemsFromJSONArray:(NSString *)objects error:(NSError **)error {
+    self.JSON = objects;
+    if (error) {
+        *error = _errorToSet;
+    }
     return self.arrayToReturn;
 }
 

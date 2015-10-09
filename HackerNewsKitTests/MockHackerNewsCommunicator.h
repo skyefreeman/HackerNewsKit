@@ -11,5 +11,6 @@
 @interface MockHackerNewsCommunicator : HackerNewsCommunicator
 
 - (BOOL)wasAskedToFetchTopStories;
+- (BOOL)wasAskedToFetchItem;
 
 @end

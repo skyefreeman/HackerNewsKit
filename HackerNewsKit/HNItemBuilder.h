@@ -7,9 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+@class HNItem;
 
 @interface HNItemBuilder : NSObject
-- (NSArray*)itemFromJSON:(NSString*)objectNotation error:(NSError **)error;
+
+- (NSArray*)itemsFromJSONArray:(NSString*)objects error:(NSError **)error;
+- (HNItem*)itemFromJSON:(NSString*)objectNotation error:(NSError **)error;
 
 @end
 
@@ -17,4 +20,5 @@ extern NSString * ItemBuilderErrorDomain;
 
 typedef NS_ENUM(NSInteger, ItemBuilderError) {
     ItemBuilderErrorInvalidJSON,
+    ItemBuilderErrorMissingData,
 };

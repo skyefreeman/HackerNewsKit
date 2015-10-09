@@ -16,7 +16,7 @@
 
 - (instancetype)initWithID:(NSString*)ID {
     self = [super init];
-    if (!self) return nil;
+    if (!self || !ID) return nil;
     
     self.ID = ID;
     

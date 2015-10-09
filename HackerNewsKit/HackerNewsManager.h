@@ -19,8 +19,11 @@
 @property (strong) HNItemBuilder *itemBuilder;
 
 - (void)fetchTopStories;
+- (void)fetchItemForID:(NSString*)ID;
 
+// 
 - (void)receivedItemJSON:(NSString*)objectNotation;
+- (void)receivedTopStoriesJSON:(NSString*)objectNotation;
 - (void)fetchingTopStoriesFailedWithError:(NSError*)error;
 
 @end
@@ -28,5 +31,6 @@
 extern NSString *HackerNewsManagerError;
 
 typedef NS_ENUM(NSInteger, HackerNewsManagerErrorCode) {
+    HackerNewsManagerErrorCodeItem,
     HackerNewsManagerErrorCodeTopStories,
 };

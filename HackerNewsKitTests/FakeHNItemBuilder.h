@@ -7,10 +7,12 @@
 //
 
 #import "HNItemBuilder.h"
-@class HNItem;
 
 @interface FakeHNItemBuilder : HNItemBuilder
-@property (copy) NSString *JSON;
-@property (copy) NSArray *arrayToReturn;
 @property (copy) NSError *errorToSet;
+
+@property (copy) NSString *JSON;
+
+@property (copy) NSArray *arrayToReturn;
+@property (strong) HNItem *itemToReturn;
 @end

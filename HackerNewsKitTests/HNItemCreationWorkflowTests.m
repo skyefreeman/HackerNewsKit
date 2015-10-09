@@ -23,7 +23,8 @@
     MockHackerNewsManagerDelegate *delegate;
     MockHackerNewsCommunicator *communicator;
     FakeHNItemBuilder *builder;
-    NSArray *itemArray;
+    
+    HNItem *returnedItem;
     
     NSError *underlyingError;
 }
@@ -44,8 +45,7 @@
     builder = [[FakeHNItemBuilder alloc] init];
     manager.itemBuilder = builder;
     
-    HNItem *item = [[HNItem alloc] initWithID:@"123"];
-    itemArray = [NSArray arrayWithObject:item];
+    returnedItem = [[HNItem alloc] initWithID:@"fakeID"];
 }
 
 - (void)tearDown {
@@ -55,7 +55,7 @@
     communicator = nil;
     underlyingError = nil;
     builder = nil;
-    itemArray = nil;
+    returnedItem = nil;
     
     [super tearDown];
 }
@@ -74,7 +74,12 @@
 
 - (void)testAskingForTopStoriesMeansRequestingData {
     [manager fetchTopStories];
-    XCTAssertTrue([communicator wasAskedToFetchTopStories],@"The communicator should need to fetch data.");
+    XCTAssertTrue([communicator wasAskedToFetchTopStories],@"Asking the communicator for top stories requires fetching data.");
+}
+
+- (void)testAskingForItemWithIDMeansRequestingData {
+    [manager fetchItemForID:@"123"];
+    XCTAssertTrue([communicator wasAskedToFetchItem], @"Asking the communicator for an item from a item ID requires fetching data ");
 }
 
 - (void)testErrorReturnedToDelegateIsNotErrorNotifiedByCommunicator {
@@ -87,6 +92,19 @@
     XCTAssertEqualObjects([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey], underlyingError, @"The underlying error should be available to client code");
 }
 
+#pragma mark - Top stories
+- (void)testItemArrayIsPassedToBuilder {
+    [manager receivedTopStoriesJSON:@"Fake JSON"];
+    XCTAssertEqualObjects(builder.JSON, @"Fake JSON", );
+}
+
+- (void)testEmptyArrayIsPassedToDelegate {
+    builder.arrayToReturn = [NSArray array];
+    [manager receivedTopStoriesJSON:@"Fake JSON"];
+    XCTAssertEqualObjects([delegate receivedTopStories], [NSArray array],@"Returning an empty array is not an error");
+}
+
+#pragma mark - Item
 - (void)testItemJSONIsPassedToItemBuilder {
     [manager receivedItemJSON:@"Fake JSON"];
     XCTAssertEqualObjects(builder.JSON, @"Fake JSON",@"Downloaded JSON is sent to the builder");
@@ -102,21 +120,15 @@
 }
 
 - (void)testDelegateNotToldAboutErrorWhenItemRecieved {
-    builder.arrayToReturn = itemArray;
+    builder.itemToReturn = returnedItem;
     [manager receivedItemJSON:@"Fake JSON"];
     XCTAssertNil([delegate fetchError],@"No error should be recieved on success");
 }
 
 - (void)testDelegateReceivesTheItemDiscoveredByManager {
-    builder.arrayToReturn = itemArray;
+    builder.itemToReturn = returnedItem;
     [manager receivedItemJSON:@"Fake JSON"];
-    XCTAssertEqualObjects([delegate receivedItems], itemArray, @"The manager should have sent it's questions to the delegate");
-}
-
-- (void)testEmptyArrayIsPassedToDelegate {
-    builder.arrayToReturn = [NSArray array];
-    [manager receivedItemJSON:@"Fake JSON"];
-    XCTAssertEqualObjects([delegate receivedItems], [NSArray array],@"Returning an empty array is not an error");
+    XCTAssertEqualObjects([delegate receivedItem], returnedItem, @"The manager should have sent it's questions to the delegate");
 }
 
 @end

@@ -14,6 +14,14 @@
 // Constants
 NSString *HackerNewsManagerError = @"HackerNewsManagerError";
 
+@interface HackerNewsManager ()
+
+- (void)tellDelegateAboutTopStoryFetchError:(NSError*)error;
+- (void)tellDelegateAboutItemFetchError:(NSError*)error;
+- (NSDictionary*)errorInfoFromError:(NSError*)error;
+
+@end
+
 @implementation HackerNewsManager
 
 - (void)setDelegate:(id<HackerNewsManagerDelegate>)delegate {
@@ -23,17 +31,28 @@ NSString *HackerNewsManagerError = @"HackerNewsManagerError";
     _delegate = delegate;
 }
 
+#pragma mark - Hacker News Communicator
 - (void)fetchTopStories {
     [self.communicator fetchTopStories];
 }
 
+- (void)fetchItemForID:(NSString *)ID {
+    [self.communicator fetchItemForID:ID];
+}
+
+#pragma mark - Items
+- (void)receivedTopStoriesJSON:(NSString*)objectNotation {
+    NSArray *topStories = [_itemBuilder itemsFromJSONArray:objectNotation error:nil];
+    [self.delegate didReceiveTopStories:topStories];
+}
+
 - (void)receivedItemJSON:(NSString*)objectNotation {
     NSError *error = nil;
-    NSArray *items = [_itemBuilder itemFromJSON:objectNotation error:&error];
-    if (!items) {
-        [self tellDelegateAboutTopStoryFetchError:error];
+    HNItem *item  = [_itemBuilder itemFromJSON:objectNotation error:&error];
+    if (!item) {
+        [self tellDelegateAboutItemFetchError:error];
     } else {
-        [self.delegate didReceiveItems:items];
+        [self.delegate didReceiveItem:item];
     }
 }
 
@@ -41,15 +60,26 @@ NSString *HackerNewsManagerError = @"HackerNewsManagerError";
     [self tellDelegateAboutTopStoryFetchError:error];
 }
 
-#pragma mark - Convenience
+#pragma mark - Class Continuation
+- (void)tellDelegateAboutItemFetchError:(NSError*)error {
+    NSDictionary *errorInfo = [self errorInfoFromError:error];
+    
+    NSError *reportableError = [NSError errorWithDomain:HackerNewsManagerError code:HackerNewsManagerErrorCodeItem userInfo:errorInfo];
+    [self.delegate fetchingTopStoriesFailedWithError:reportableError];
+}
+
 - (void)tellDelegateAboutTopStoryFetchError:(NSError*)error {
-    NSDictionary *errorInfo = nil;
-    if (error) {
-        errorInfo = [NSDictionary dictionaryWithObject:error forKey:NSUnderlyingErrorKey];
-    }
+    NSDictionary *errorInfo = [self errorInfoFromError:error];
     
     NSError *reportableError = [NSError errorWithDomain:HackerNewsManagerError code:HackerNewsManagerErrorCodeTopStories userInfo:errorInfo];
     [self.delegate fetchingTopStoriesFailedWithError:reportableError];
+}
+
+- (NSDictionary*)errorInfoFromError:(NSError*)error {
+    if (error) {
+        return [NSDictionary dictionaryWithObject:error forKey:NSUnderlyingErrorKey];
+    }
+    return nil;
 }
 
 @end

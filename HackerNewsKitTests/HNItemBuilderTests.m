@@ -10,8 +10,9 @@
 #import "HNItemBuilder.h"
 
 @interface HNItemBuilderTests : XCTestCase
-
 @end
+
+static NSString *noIDJSONString = @"{ \"noID\": true }";
 
 @implementation HNItemBuilderTests
 {
@@ -29,6 +30,9 @@
     [super tearDown];
 }
 
+#pragma mark - Items
+
+#pragma mark - Item
 - (void)testThatNilIsNotAnAcceptableParameter {
     XCTAssertThrows([itemBuilder itemFromJSON:nil error:nil], @"Lack of data needs to be handled");
 }
@@ -45,6 +49,12 @@
 
 - (void)testPassingNilErrorDoesNotCauseCrash {
     XCTAssertNoThrow([itemBuilder itemFromJSON:@"Not JSON" error:nil]);
+}
+
+- (void)testRealJSONWithoutIDReturnsMissingDataError {
+    NSError *error = nil;
+    [itemBuilder itemFromJSON:noIDJSONString error:&error];
+    XCTAssertEqual([error code], ItemBuilderErrorMissingData, @"This case needs to specify the it was correct json, but was missing the correct data");
 }
 
 @end
