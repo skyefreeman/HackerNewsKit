@@ -11,4 +11,5 @@
 
 @interface MockHackerNewsManagerDelegate : NSObject <HackerNewsManagerDelegate>
 @property (strong) NSError *fetchError;
+@property (strong) NSArray *receivedItems;
 @end

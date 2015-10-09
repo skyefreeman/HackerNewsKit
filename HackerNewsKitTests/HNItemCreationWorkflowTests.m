@@ -11,15 +11,19 @@
 #import "HackerNewsManager.h"
 #import "MockHackerNewsManagerDelegate.h"
 #import "MockHackerNewsCommunicator.h"
+#import "FakeHNItemBuilder.h"
+#import "HNItem.h"
 
-@interface HNItemCreationTests : XCTestCase
+@interface HNItemCreationWorkflowTests : XCTestCase
 @end
 
-@implementation HNItemCreationTests
+@implementation HNItemCreationWorkflowTests
 {
     HackerNewsManager *manager;
     MockHackerNewsManagerDelegate *delegate;
     MockHackerNewsCommunicator *communicator;
+    FakeHNItemBuilder *builder;
+    NSArray *itemArray;
     
     NSError *underlyingError;
 }
@@ -28,20 +32,30 @@
     [super setUp];
     
     manager = [[HackerNewsManager alloc] init];
+
     delegate = [[MockHackerNewsManagerDelegate alloc] init];
     manager.delegate = delegate;
-    
+
     communicator = [[MockHackerNewsCommunicator alloc] init];
     manager.communicator = communicator;
     
     underlyingError = [NSError errorWithDomain:@"Test Domain" code:0 userInfo:nil];
+    
+    builder = [[FakeHNItemBuilder alloc] init];
+    manager.itemBuilder = builder;
+    
+    HNItem *item = [[HNItem alloc] initWithID:@"123"];
+    itemArray = [NSArray arrayWithObject:item];
 }
 
 - (void)tearDown {
     manager = nil;
+    manager.itemBuilder = nil;
     delegate = nil;
     communicator = nil;
     underlyingError = nil;
+    builder = nil;
+    itemArray = nil;
     
     [super tearDown];
 }
@@ -71,6 +85,38 @@
 - (void)testErrorReturnedToDelegateDocumentsUnderlyingError {
     [manager fetchingTopStoriesFailedWithError:underlyingError];
     XCTAssertEqualObjects([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey], underlyingError, @"The underlying error should be available to client code");
+}
+
+- (void)testItemJSONIsPassedToItemBuilder {
+    [manager receivedItemJSON:@"Fake JSON"];
+    XCTAssertEqualObjects(builder.JSON, @"Fake JSON",@"Downloaded JSON is sent to the builder");
+}
+
+- (void)testDelegateNotifiedOfErrorWhenItemBuilderFails {
+    builder.arrayToReturn = nil;
+    builder.errorToSet = underlyingError;
+    
+    [manager receivedItemJSON:@"Fake JSON"];
+    
+    XCTAssertNotNil([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey], @"The delegate should have found out about the error");
+}
+
+- (void)testDelegateNotToldAboutErrorWhenItemRecieved {
+    builder.arrayToReturn = itemArray;
+    [manager receivedItemJSON:@"Fake JSON"];
+    XCTAssertNil([delegate fetchError],@"No error should be recieved on success");
+}
+
+- (void)testDelegateReceivesTheItemDiscoveredByManager {
+    builder.arrayToReturn = itemArray;
+    [manager receivedItemJSON:@"Fake JSON"];
+    XCTAssertEqualObjects([delegate receivedItems], itemArray, @"The manager should have sent it's questions to the delegate");
+}
+
+- (void)testEmptyArrayIsPassedToDelegate {
+    builder.arrayToReturn = [NSArray array];
+    [manager receivedItemJSON:@"Fake JSON"];
+    XCTAssertEqualObjects([delegate receivedItems], [NSArray array],@"Returning an empty array is not an error");
 }
 
 @end

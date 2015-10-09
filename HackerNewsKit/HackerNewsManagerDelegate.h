@@ -10,4 +10,5 @@
 
 @protocol HackerNewsManagerDelegate <NSObject>
 - (void)fetchingTopStoriesFailedWithError:(NSError*)error;
+- (void)didReceiveItems:(NSArray*)items;
 @end

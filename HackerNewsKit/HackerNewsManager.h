@@ -10,14 +10,17 @@
 
 #import "HackerNewsManagerDelegate.h"
 #import "HackerNewsCommunicator.h"
+#import "HNItemBuilder.h"
 
 @interface HackerNewsManager : NSObject
 
 @property (nonatomic, weak) id <HackerNewsManagerDelegate> delegate;
 @property (strong) HackerNewsCommunicator *communicator;
+@property (strong) HNItemBuilder *itemBuilder;
 
 - (void)fetchTopStories;
 
+- (void)receivedItemJSON:(NSString*)objectNotation;
 - (void)fetchingTopStoriesFailedWithError:(NSError*)error;
 
 @end

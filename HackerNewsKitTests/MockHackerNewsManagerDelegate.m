@@ -12,4 +12,9 @@
 - (void)fetchingTopStoriesFailedWithError:(NSError *)error {
     self.fetchError = error;
 }
+
+- (void)didReceiveItems:(NSArray *)items {
+    self.receivedItems = items;
+}
+
 @end

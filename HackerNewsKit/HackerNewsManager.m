@@ -8,6 +8,12 @@
 
 #import "HackerNewsManager.h"
 
+// Builders
+#import "HNItemBuilder.h"
+
+// Constants
+NSString *HackerNewsManagerError = @"HackerNewsManagerError";
+
 @implementation HackerNewsManager
 
 - (void)setDelegate:(id<HackerNewsManagerDelegate>)delegate {
@@ -21,11 +27,29 @@
     [self.communicator fetchTopStories];
 }
 
+- (void)receivedItemJSON:(NSString*)objectNotation {
+    NSError *error = nil;
+    NSArray *items = [_itemBuilder itemFromJSON:objectNotation error:&error];
+    if (!items) {
+        [self tellDelegateAboutTopStoryFetchError:error];
+    } else {
+        [self.delegate didReceiveItems:items];
+    }
+}
+
 - (void)fetchingTopStoriesFailedWithError:(NSError*)error {
-    NSDictionary *errorInfo = [NSDictionary dictionaryWithObject:error forKey:NSUnderlyingErrorKey];
+    [self tellDelegateAboutTopStoryFetchError:error];
+}
+
+#pragma mark - Convenience
+- (void)tellDelegateAboutTopStoryFetchError:(NSError*)error {
+    NSDictionary *errorInfo = nil;
+    if (error) {
+        errorInfo = [NSDictionary dictionaryWithObject:error forKey:NSUnderlyingErrorKey];
+    }
+    
     NSError *reportableError = [NSError errorWithDomain:HackerNewsManagerError code:HackerNewsManagerErrorCodeTopStories userInfo:errorInfo];
     [self.delegate fetchingTopStoriesFailedWithError:reportableError];
 }
-@end
 
-NSString *HackerNewsManagerError = @"HackerNewsManagerError";
+@end
