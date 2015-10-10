@@ -106,4 +106,10 @@ static NSString *storyJSONString = @"{"
     XCTAssertTrue([[itemArray firstObject] isKindOfClass:[HNItem class]],@"Should turn array of json objects into an array of Hacker news item objects");
 }
 
+- (void)testThatTwoJSONItemsTurnsIntoTwoHNItems {
+    NSArray *jsonArray = @[storyJSONString,storyJSONString];
+    NSArray *itemArray = [itemBuilder itemsFromJSONArray:jsonArray error:nil];
+    XCTAssertEqual(itemArray.count, jsonArray.count, @"Two JSON items should be parsed into two HN Items");
+}
+
 @end

@@ -8,7 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HackerNewsCommunicator : NSObject
+@interface HackerNewsCommunicator : NSObject {
+@protected
+    NSURL *fetchingURL;
+}
+
 - (void)fetchTopStories;
 - (void)fetchItemForID:(NSString*)ID;
+
 @end

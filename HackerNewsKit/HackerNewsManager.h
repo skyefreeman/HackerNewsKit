@@ -12,8 +12,14 @@
 #import "HackerNewsCommunicator.h"
 #import "HNItemBuilder.h"
 
-@interface HackerNewsManager : NSObject
+extern NSString *HackerNewsManagerError;
 
+typedef NS_ENUM(NSInteger, HackerNewsManagerErrorCode) {
+    HackerNewsManagerErrorCodeItem,
+    HackerNewsManagerErrorCodeTopStories,
+};
+
+@interface HackerNewsManager : NSObject
 @property (nonatomic, weak) id <HackerNewsManagerDelegate> delegate;
 @property (strong) HackerNewsCommunicator *communicator;
 @property (strong) HNItemBuilder *itemBuilder;
@@ -21,16 +27,9 @@
 - (void)fetchTopStories;
 - (void)fetchItemForID:(NSString*)ID;
 
-// 
+//
 - (void)receivedItemJSON:(NSString*)objectNotation;
 - (void)receivedTopStoriesJSON:(NSArray*)JSONArray;
 - (void)fetchingTopStoriesFailedWithError:(NSError*)error;
-
+//
 @end
-
-extern NSString *HackerNewsManagerError;
-
-typedef NS_ENUM(NSInteger, HackerNewsManagerErrorCode) {
-    HackerNewsManagerErrorCodeItem,
-    HackerNewsManagerErrorCodeTopStories,
-};
