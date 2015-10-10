@@ -14,11 +14,11 @@
     return nil;
 }
 
-- (instancetype)initWithID:(NSString*)ID {
+- (instancetype)initWithIdentifier:(NSInteger)identifier {
     self = [super init];
-    if (!self || !ID) return nil;
+    if (!self || !identifier) return nil;
     
-    self.ID = ID;
+    self.identifier = identifier;
     
     return self;
 }
@@ -28,7 +28,7 @@
     self = [super init];
     if (!self) return nil;
     
-    self.ID = [aDecoder decodeObjectForKey:@"ID"];
+    self.identifier = [aDecoder decodeIntegerForKey:@"identifier"];
     self.type = [aDecoder decodeObjectForKey:@"type"];
     self.by = [aDecoder decodeObjectForKey:@"by"];
     self.text = [aDecoder decodeObjectForKey:@"text"];
@@ -40,14 +40,12 @@
     self.score = [aDecoder decodeIntegerForKey:@"score"];
     self.kids = [aDecoder decodeObjectForKey:@"kids"];
     self.parts = [aDecoder decodeObjectForKey:@"parts"];
-    self.deleted = [aDecoder decodeBoolForKey:@"deleted"];
-    self.dead = [aDecoder decodeBoolForKey:@"dead"];
     
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.ID forKey:@"ID"];
+    [aCoder encodeInteger:self.identifier forKey:@"identifier"];
     [aCoder encodeObject:self.type forKey:@"type"];
     [aCoder encodeObject:self.by forKey:@"by"];
     [aCoder encodeObject:self.text forKey:@"text"];
@@ -59,8 +57,6 @@
     [aCoder encodeInteger:self.score forKey:@"score"];
     [aCoder encodeObject:self.kids forKey:@"kids"];
     [aCoder encodeObject:self.parts forKey:@"parts"];
-    [aCoder encodeBool:self.deleted forKey:@"deleted"];
-    [aCoder encodeBool:self.dead forKey:@"dead"];
 }
 
 @end

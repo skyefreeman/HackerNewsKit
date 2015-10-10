@@ -18,12 +18,15 @@ NSString * ItemBuilderErrorDomain = @"ItemBuilderErrorDomain";
 
 @implementation HNItemBuilder
 - (NSArray*)itemsFromJSONArray:(NSArray*)itemArray error:(NSError **)error {
+    NSParameterAssert(itemArray != nil);
+    
     NSMutableArray *tempItems = [NSMutableArray array];
     for (NSString *itemJson in itemArray) {
         NSError *itemError = nil;
         HNItem *newItem = [self itemFromJSON:itemJson error:&itemError];
         [tempItems addObject:newItem];
     }
+    
     return [NSArray arrayWithArray:tempItems];
 }
 
@@ -55,7 +58,21 @@ NSString * ItemBuilderErrorDomain = @"ItemBuilderErrorDomain";
 
 #pragma mark - Class Continuation
 - (HNItem*)itemFromDictionary:(NSDictionary*)dict {
-    HNItem *item = [[HNItem alloc] initWithID:[dict objectForKey:@"id"]];
+    HNItem *item = [[HNItem alloc] initWithIdentifier:[[dict objectForKey:@"id"] integerValue]];
+    item.type = dict[@"type"];
+    item.by = dict[@"by"];
+    item.text = dict[@"text"];
+    item.url = dict[@"url"];
+    item.title = dict[@"title"];
+    
+    item.time = [dict integerForKey:@"time"];
+    item.parent = [dict integerForKey:@"parent"];
+    item.descendants = [dict integerForKey:@"descendants"];
+    item.score = [dict integerForKey:@"score"];
+    
+    item.kids = dict[@"kids"];
+    item.parts = dict[@"parts"];
+    
     return item;
 }
 
@@ -65,6 +82,19 @@ NSString * ItemBuilderErrorDomain = @"ItemBuilderErrorDomain";
     NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:unicodeNotation options:0 error:&localError];
     NSDictionary *parsedObject = (id)jsonObject;
     return parsedObject;
+}
+
+@end
+
+@implementation NSDictionary (HNItemBuilderAdditions)
+- (BOOL)boolForKey:(NSString*)key {
+    NSNumber *number = [self objectForKey:key];
+    return [number boolValue];
+}
+
+- (NSInteger)integerForKey:(NSString*)key {
+    NSNumber *number = [self objectForKey:key];
+    return [number integerValue];
 }
 
 @end

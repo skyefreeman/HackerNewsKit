@@ -9,16 +9,20 @@
 #import <Foundation/Foundation.h>
 @class HNItem;
 
-@interface HNItemBuilder : NSObject
-
-- (NSArray*)itemsFromJSONArray:(NSArray*)itemArray error:(NSError **)error;
-- (HNItem*)itemFromJSON:(NSString*)objectNotation error:(NSError **)error;
-
-@end
-
 extern NSString * ItemBuilderErrorDomain;
 
 typedef NS_ENUM(NSInteger, ItemBuilderError) {
     ItemBuilderErrorInvalidJSON,
+    ItemBuilderErrorInvalidArray,
     ItemBuilderErrorMissingData,
 };
+
+@interface HNItemBuilder : NSObject
+- (NSArray*)itemsFromJSONArray:(NSArray*)itemArray error:(NSError **)error;
+- (HNItem*)itemFromJSON:(NSString*)objectNotation error:(NSError **)error;
+@end
+
+@interface NSDictionary (HNItemBuilderAdditions)
+- (BOOL)boolForKey:(NSString*)key;
+- (NSInteger)integerForKey:(NSString*)key;
+@end

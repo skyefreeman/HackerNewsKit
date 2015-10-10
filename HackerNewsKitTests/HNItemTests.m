@@ -20,7 +20,7 @@
 - (void)setUp {
     [super setUp];
     
-    item = [[HNItem alloc] initWithID:@"123"];
+    item = [[HNItem alloc] initWithIdentifier:123];
 }
 
 - (void)tearDown {
@@ -39,7 +39,7 @@
 }
 
 - (void)testItemHasAnIDProperty {
-    XCTAssertEqual(item.ID, @"123",@"An HNItem needs to have an ID");
+    XCTAssertEqual(item.identifier, 123,@"An HNItem needs to have an identifier");
 }
 
 - (void)testItemCanBeSavedInUserDefaults {
@@ -51,7 +51,7 @@
     NSData *savedData = [defaults objectForKey:@"item"];
     HNItem *savedItem = [NSKeyedUnarchiver unarchiveObjectWithData:savedData];
     
-    XCTAssertTrue([item.ID isEqualToString:savedItem.ID], @"HNItem should be NSCoding compliant.");
+    XCTAssertTrue(item.identifier == savedItem.identifier, @"HNItem should be NSCoding compliant.");
 }
 
 @end

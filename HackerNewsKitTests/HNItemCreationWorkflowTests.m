@@ -46,8 +46,8 @@
     builder = [[FakeHNItemBuilder alloc] init];
     manager.itemBuilder = builder;
     
-    returnedItem = [[HNItem alloc] initWithID:@"fakeID"];
-    returnedTopStories = [NSArray arrayWithObject:[[HNItem alloc] initWithID:@"123"]];
+    returnedItem = [[HNItem alloc] initWithIdentifier:123];
+    returnedTopStories = [NSArray arrayWithObject:[[HNItem alloc] initWithIdentifier:123]];
 }
 
 - (void)tearDown {

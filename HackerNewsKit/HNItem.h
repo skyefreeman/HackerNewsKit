@@ -10,9 +10,9 @@
 
 @interface HNItem : NSObject <NSCoding>
 
-- (instancetype)initWithID:(NSString*)ID;
+- (instancetype)initWithIdentifier:(NSInteger)identifier;
 
-@property (copy) NSString *ID;
+@property (assign) NSInteger identifier;
 
 @property (copy) NSString *type;
 @property (copy) NSString *by;
@@ -20,15 +20,12 @@
 @property (copy) NSString *url;
 @property (copy) NSString *title;
 
-@property NSInteger time;
-@property NSInteger parent;
-@property NSInteger descendants;
-@property NSInteger score;
+@property (assign) NSInteger time;
+@property (assign) NSInteger parent;
+@property (assign) NSInteger descendants;
+@property (assign) NSInteger score;
 
-@property NSArray *kids;
-@property NSArray *parts;
-
-@property (getter=isDeleted) BOOL deleted;
-@property (getter=isDead) BOOL dead;
+@property (copy) NSArray *kids;
+@property (copy) NSArray *parts;
 
 @end
