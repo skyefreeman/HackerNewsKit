@@ -18,8 +18,8 @@
     return self.itemToReturn;
 }
 
-- (NSArray*)itemsFromJSONArray:(NSString *)objects error:(NSError **)error {
-    self.JSON = objects;
+- (NSArray*)itemsFromJSONArray:(NSArray*)itemArray error:(NSError **)error {
+    self.JSONArray = itemArray;
     if (error) {
         *error = _errorToSet;
     }

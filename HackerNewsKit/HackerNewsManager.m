@@ -41,9 +41,14 @@ NSString *HackerNewsManagerError = @"HackerNewsManagerError";
 }
 
 #pragma mark - Items
-- (void)receivedTopStoriesJSON:(NSString*)objectNotation {
-    NSArray *topStories = [_itemBuilder itemsFromJSONArray:objectNotation error:nil];
-    [self.delegate didReceiveTopStories:topStories];
+- (void)receivedTopStoriesJSON:(NSArray*)JSONArray {
+    NSError *error = nil;
+    NSArray *topStories = [_itemBuilder itemsFromJSONArray:JSONArray error:&error];
+    if (!topStories) {
+        [self tellDelegateAboutTopStoryFetchError:error];
+    } else {
+        [self.delegate didReceiveTopStories:topStories];
+    }
 }
 
 - (void)receivedItemJSON:(NSString*)objectNotation {

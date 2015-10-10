@@ -12,6 +12,7 @@
 @property (copy) NSError *errorToSet;
 
 @property (copy) NSString *JSON;
+@property (copy) NSArray *JSONArray;
 
 @property (copy) NSArray *arrayToReturn;
 @property (strong) HNItem *itemToReturn;

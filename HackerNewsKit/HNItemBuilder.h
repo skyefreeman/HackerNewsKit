@@ -11,7 +11,7 @@
 
 @interface HNItemBuilder : NSObject
 
-- (NSArray*)itemsFromJSONArray:(NSString*)objects error:(NSError **)error;
+- (NSArray*)itemsFromJSONArray:(NSArray*)itemArray error:(NSError **)error;
 - (HNItem*)itemFromJSON:(NSString*)objectNotation error:(NSError **)error;
 
 @end

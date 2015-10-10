@@ -25,6 +25,7 @@
     FakeHNItemBuilder *builder;
     
     HNItem *returnedItem;
+    NSArray *returnedTopStories;
     
     NSError *underlyingError;
 }
@@ -46,6 +47,7 @@
     manager.itemBuilder = builder;
     
     returnedItem = [[HNItem alloc] initWithID:@"fakeID"];
+    returnedTopStories = [NSArray arrayWithObject:[[HNItem alloc] initWithID:@"123"]];
 }
 
 - (void)tearDown {
@@ -56,6 +58,7 @@
     underlyingError = nil;
     builder = nil;
     returnedItem = nil;
+    returnedTopStories = nil;
     
     [super tearDown];
 }
@@ -94,23 +97,36 @@
 
 #pragma mark - Top stories
 - (void)testItemArrayIsPassedToBuilder {
-    [manager receivedTopStoriesJSON:@"Fake JSON"];
-    XCTAssertEqualObjects(builder.JSON, @"Fake JSON", );
+    [manager receivedTopStoriesJSON:@[@"Fake JSON"]];
+    XCTAssertEqualObjects(builder.JSONArray, @[@"Fake JSON"], @"Array of items needs to be passed to the builder");
 }
 
 - (void)testEmptyArrayIsPassedToDelegate {
     builder.arrayToReturn = [NSArray array];
-    [manager receivedTopStoriesJSON:@"Fake JSON"];
+    [manager receivedTopStoriesJSON:@[@"Fake JSON"]];
     XCTAssertEqualObjects([delegate receivedTopStories], [NSArray array],@"Returning an empty array is not an error");
 }
 
+- (void)testDelegateNotifiedOfErrorWhenItemBuilderFailsToMakeATopStoryArray {
+    builder.arrayToReturn = nil;
+    builder.errorToSet = underlyingError;
+    [manager receivedTopStoriesJSON:@[@"Fake JSON"]];
+    XCTAssertNotNil([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey],@"The delegate should have found out about the error");
+}
+
+- (void)testDelegateRecievesTopStoriesDiscoveredByManager {
+    builder.arrayToReturn = returnedTopStories;
+    builder.errorToSet = underlyingError;
+    [manager receivedTopStoriesJSON:@[@"Fake JSON"]];
+    XCTAssertEqualObjects([delegate receivedTopStories], returnedTopStories, @"The manager should have sent its top stories to the delegate");
+}
 #pragma mark - Item
 - (void)testItemJSONIsPassedToItemBuilder {
     [manager receivedItemJSON:@"Fake JSON"];
     XCTAssertEqualObjects(builder.JSON, @"Fake JSON",@"Downloaded JSON is sent to the builder");
 }
 
-- (void)testDelegateNotifiedOfErrorWhenItemBuilderFails {
+- (void)testDelegateNotifiedOfErrorWhenItemBuilderFailsToMakeAnItem {
     builder.arrayToReturn = nil;
     builder.errorToSet = underlyingError;
     

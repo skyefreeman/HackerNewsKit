@@ -8,11 +8,13 @@
 
 #import <XCTest/XCTest.h>
 #import "HNItemBuilder.h"
+#import "HNItem.h"
 
 @interface HNItemBuilderTests : XCTestCase
 @end
 
 static NSString *noIDJSONString = @"{ \"noID\": true }";
+static NSString *IDJSONString = @"{ \"id\": 123 }";
 
 @implementation HNItemBuilderTests
 {
@@ -26,11 +28,16 @@ static NSString *noIDJSONString = @"{ \"noID\": true }";
 
 - (void)tearDown {
     itemBuilder = nil;
-
+    
     [super tearDown];
 }
 
 #pragma mark - Items
+- (void)testThatItemsAreParsedIntoAnArray {
+    NSArray *jsonArray = @[IDJSONString];
+    NSArray *itemArray = [itemBuilder itemsFromJSONArray:jsonArray error:nil];
+    XCTAssertTrue([[itemArray firstObject] isKindOfClass:[HNItem class]],@"ItemsFromJSONArray: should turn multiple json objects into an array of Hacker news Items");
+}
 
 #pragma mark - Item
 - (void)testThatNilIsNotAnAcceptableParameter {

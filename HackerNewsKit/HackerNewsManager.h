@@ -23,7 +23,7 @@
 
 // 
 - (void)receivedItemJSON:(NSString*)objectNotation;
-- (void)receivedTopStoriesJSON:(NSString*)objectNotation;
+- (void)receivedTopStoriesJSON:(NSArray*)JSONArray;
 - (void)fetchingTopStoriesFailedWithError:(NSError*)error;
 
 @end
