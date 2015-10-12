@@ -28,7 +28,7 @@
     return wasAskedToFetchItem;
 }
 
-- (void)fetchItemForID:(NSString *)ID {
+- (void)fetchItemForIdentifier:(NSInteger)identifier {
     wasAskedToFetchItem = YES;
 }
 

@@ -36,8 +36,8 @@ NSString *HackerNewsManagerError = @"HackerNewsManagerError";
     [self.communicator fetchTopStories];
 }
 
-- (void)fetchItemForID:(NSString *)ID {
-    [self.communicator fetchItemForID:ID];
+- (void)fetchItemForIdentifier:(NSInteger)identifier {
+    [self.communicator fetchItemForIdentifier:identifier];
 }
 
 #pragma mark - Items

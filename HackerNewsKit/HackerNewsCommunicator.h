@@ -14,6 +14,10 @@
 }
 
 - (void)fetchTopStories;
-- (void)fetchItemForID:(NSString*)ID;
+- (void)fetchNewStories;
+- (void)fetchAskStories;
+- (void)fetchShowStories;
+- (void)fetchJobStories;
+- (void)fetchItemForIdentifier:(NSInteger)identifier;
 
 @end

@@ -11,9 +11,15 @@
 #import "InspectableHackerNewsCommunicator.h"
 
 @interface HackerNewsCommunicatorTests : XCTestCase
+- (NSString*)fetchedURLString;
 @end
 
-static NSString *topStoryURL = @"https://hacker-news.firebaseio.com/v0/topstories";
+static NSString *testTopStoryURLString = @"https://hacker-news.firebaseio.com/v0/topstories.json";
+static NSString *testNewStoryURLString = @"https://hacker-news.firebaseio.com/v0/newstories.json";
+static NSString *testAskStoryURLString = @"https://hacker-news.firebaseio.com/v0/askstories.json";
+static NSString *testShowStoryURLString = @"https://hacker-news.firebaseio.com/v0/showstories.json";
+static NSString *testJobStoryURLString = @"https://hacker-news.firebaseio.com/v0/jobstories.json";
+static NSString *testItemURLString = @"https://hacker-news.firebaseio.com/v0/item/123.json";
 
 @implementation HackerNewsCommunicatorTests
 {
@@ -30,14 +36,39 @@ static NSString *topStoryURL = @"https://hacker-news.firebaseio.com/v0/topstorie
     [super tearDown];
 }
 
-- (void)testFetchingTopStoriesCallsHackerNewsAPI {
+- (void)testFetchingTopStoriesCallsHackerNewsTopStoryAPI {
     [communicator fetchTopStories];
-    NSURL *testURL = [NSURL URLWithString:topStoryURL];
-    XCTAssertEqualObjects([communicator URLToFetch], testURL, @"Asking for top stories needs to use the correct URL");
+    XCTAssertEqualObjects([self fetchedURLString], testTopStoryURLString, @"Asking for top stories needs to use the correct URL string");
 }
 
-- (void)testFetchingAnItemCallsHackerNewsAPI {
-    XCTAssertTrue(NO);
+- (void)testFetchingNewStoriesCallsHackerNewsNewStoryAPI {
+    [communicator fetchNewStories];
+    XCTAssertEqualObjects([self fetchedURLString], testNewStoryURLString, @"Asking for new stories needs to use the correct URL string");
+}
+
+- (void)testFetchingAskStoriesCallsHackerNewsAskStoryAPI {
+    [communicator fetchAskStories];
+    XCTAssertEqualObjects([self fetchedURLString], testAskStoryURLString, @"Asking for ask stories needs to use the correct URL string");
+}
+
+- (void)testFetchingShowStoriesCallsHackerNewsShowStoryAPI {
+    [communicator fetchShowStories];
+    XCTAssertEqualObjects([self fetchedURLString], testShowStoryURLString, @"Asking for show stories needs to use the correct URL string");
+}
+
+- (void)testFetchingJobStoriesCallsHackerNewsJobStoryAPI {
+    [communicator fetchJobStories];
+    XCTAssertEqualObjects([self fetchedURLString], testJobStoryURLString, @"Asking for job stories needs to use the correct URL string");
+}
+
+- (void)testFetchingAnItemCallsHackerNewsItemAPI {
+    [communicator fetchItemForIdentifier:123];
+    XCTAssertEqualObjects([self fetchedURLString], testItemURLString, @"Asking for an individual item needs to construct the correct URL string.");
+}
+
+#pragma mark - Convenience
+- (NSString*)fetchedURLString {
+    return [[communicator URLToFetch] absoluteString];
 }
 
 @end

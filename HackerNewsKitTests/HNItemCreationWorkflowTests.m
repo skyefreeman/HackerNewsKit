@@ -81,7 +81,7 @@
 }
 
 - (void)testAskingForItemWithIDMeansRequestingData {
-    [manager fetchItemForID:@"123"];
+    [manager fetchItemForIdentifier:123];
     XCTAssertTrue([communicator wasAskedToFetchItem], @"Asking the communicator for an item from a item ID requires fetching data ");
 }
 

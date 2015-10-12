@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, HackerNewsManagerErrorCode) {
 @property (strong) HNItemBuilder *itemBuilder;
 
 - (void)fetchTopStories;
-- (void)fetchItemForID:(NSString*)ID;
+- (void)fetchItemForIdentifier:(NSInteger)identifier;
 
 //
 - (void)receivedItemJSON:(NSString*)objectNotation;
