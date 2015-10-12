@@ -10,4 +10,6 @@
 
 @interface InspectableHackerNewsCommunicator : HackerNewsCommunicator
 - (NSURL*)URLToFetch;
+- (NSURLSession*)currentSession;
+- (NSURLSessionDataTask*)currentSessionTask;
 @end

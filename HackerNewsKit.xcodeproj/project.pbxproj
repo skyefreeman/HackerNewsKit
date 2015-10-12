@@ -25,6 +25,9 @@
 		EED00C061BC82FE9004C3151 /* HNItemBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C051BC82FE9004C3151 /* HNItemBuilderTests.m */; settings = {ASSET_TAGS = (); }; };
 		EED00C0A1BC9B17A004C3151 /* HackerNewsCommunicatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C091BC9B17A004C3151 /* HackerNewsCommunicatorTests.m */; settings = {ASSET_TAGS = (); }; };
 		EED00C0D1BC9B505004C3151 /* InspectableHackerNewsCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C0C1BC9B505004C3151 /* InspectableHackerNewsCommunicator.m */; settings = {ASSET_TAGS = (); }; };
+		EED00C141BCC54A0004C3151 /* NonNetworkedHackerNewsCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C131BCC54A0004C3151 /* NonNetworkedHackerNewsCommunicator.m */; settings = {ASSET_TAGS = (); }; };
+		EED00C171BCC5A09004C3151 /* MockHackerNewsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C161BCC5A09004C3151 /* MockHackerNewsManager.m */; settings = {ASSET_TAGS = (); }; };
+		EED00C1A1BCC5A3D004C3151 /* FakeURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C191BCC5A3D004C3151 /* FakeURLResponse.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +74,13 @@
 		EED00C091BC9B17A004C3151 /* HackerNewsCommunicatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HackerNewsCommunicatorTests.m; sourceTree = "<group>"; };
 		EED00C0B1BC9B505004C3151 /* InspectableHackerNewsCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectableHackerNewsCommunicator.h; sourceTree = "<group>"; };
 		EED00C0C1BC9B505004C3151 /* InspectableHackerNewsCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectableHackerNewsCommunicator.m; sourceTree = "<group>"; };
+		EED00C121BCC54A0004C3151 /* NonNetworkedHackerNewsCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NonNetworkedHackerNewsCommunicator.h; sourceTree = "<group>"; };
+		EED00C131BCC54A0004C3151 /* NonNetworkedHackerNewsCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NonNetworkedHackerNewsCommunicator.m; sourceTree = "<group>"; };
+		EED00C151BCC5A09004C3151 /* MockHackerNewsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockHackerNewsManager.h; sourceTree = "<group>"; };
+		EED00C161BCC5A09004C3151 /* MockHackerNewsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockHackerNewsManager.m; sourceTree = "<group>"; };
+		EED00C181BCC5A3D004C3151 /* FakeURLResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeURLResponse.h; sourceTree = "<group>"; };
+		EED00C191BCC5A3D004C3151 /* FakeURLResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeURLResponse.m; sourceTree = "<group>"; };
+		EED00C1B1BCC5CE9004C3151 /* HackerNewsCommunicatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HackerNewsCommunicatorDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +132,7 @@
 				EED00BEA1BC5B628004C3151 /* HackerNewsManagerDelegate.h */,
 				EED00BF21BC5BE0F004C3151 /* HackerNewsCommunicator.h */,
 				EED00BF31BC5BE0F004C3151 /* HackerNewsCommunicator.m */,
+				EED00C1B1BCC5CE9004C3151 /* HackerNewsCommunicatorDelegate.h */,
 			);
 			path = HackerNewsKit;
 			sourceTree = "<group>";
@@ -137,7 +148,7 @@
 		EE2643A11BC32562002C4F8A /* HackerNewsKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				EED00BEE1BC5B8A2004C3151 /* Mocks + Stubs */,
+				EED00BEE1BC5B8A2004C3151 /* Mocks + Fakes + Stubs */,
 				EED00BED1BC5B89D004C3151 /* Tests */,
 				EE2643A41BC32562002C4F8A /* Info.plist */,
 			);
@@ -171,19 +182,25 @@
 			name = Tests;
 			sourceTree = "<group>";
 		};
-		EED00BEE1BC5B8A2004C3151 /* Mocks + Stubs */ = {
+		EED00BEE1BC5B8A2004C3151 /* Mocks + Fakes + Stubs */ = {
 			isa = PBXGroup;
 			children = (
+				EED00C151BCC5A09004C3151 /* MockHackerNewsManager.h */,
+				EED00C161BCC5A09004C3151 /* MockHackerNewsManager.m */,
 				EED00BEF1BC5B8DE004C3151 /* MockHackerNewsManagerDelegate.h */,
 				EED00BF01BC5B8DE004C3151 /* MockHackerNewsManagerDelegate.m */,
 				EED00BF51BC5BE3A004C3151 /* MockHackerNewsCommunicator.h */,
 				EED00BF61BC5BE3A004C3151 /* MockHackerNewsCommunicator.m */,
-				EED00C021BC80211004C3151 /* FakeHNItemBuilder.h */,
-				EED00C031BC80211004C3151 /* FakeHNItemBuilder.m */,
 				EED00C0B1BC9B505004C3151 /* InspectableHackerNewsCommunicator.h */,
 				EED00C0C1BC9B505004C3151 /* InspectableHackerNewsCommunicator.m */,
+				EED00C121BCC54A0004C3151 /* NonNetworkedHackerNewsCommunicator.h */,
+				EED00C131BCC54A0004C3151 /* NonNetworkedHackerNewsCommunicator.m */,
+				EED00C021BC80211004C3151 /* FakeHNItemBuilder.h */,
+				EED00C031BC80211004C3151 /* FakeHNItemBuilder.m */,
+				EED00C181BCC5A3D004C3151 /* FakeURLResponse.h */,
+				EED00C191BCC5A3D004C3151 /* FakeURLResponse.m */,
 			);
-			name = "Mocks + Stubs";
+			name = "Mocks + Fakes + Stubs";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EED00C171BCC5A09004C3151 /* MockHackerNewsManager.m in Sources */,
 				EED00C061BC82FE9004C3151 /* HNItemBuilderTests.m in Sources */,
 				EED00C0A1BC9B17A004C3151 /* HackerNewsCommunicatorTests.m in Sources */,
 				EED00BF11BC5B8DE004C3151 /* MockHackerNewsManagerDelegate.m in Sources */,
@@ -308,6 +326,8 @@
 				EE2643AF1BC32824002C4F8A /* HNItemTests.m in Sources */,
 				EED00C041BC80211004C3151 /* FakeHNItemBuilder.m in Sources */,
 				EED00BE61BC5B153004C3151 /* HNItemCreationWorkflowTests.m in Sources */,
+				EED00C1A1BCC5A3D004C3151 /* FakeURLResponse.m in Sources */,
+				EED00C141BCC54A0004C3151 /* NonNetworkedHackerNewsCommunicator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,38 +17,96 @@ static NSString *jobStoryURLString = @"https://hacker-news.firebaseio.com/v0/job
 static NSString *baseItemURLString = @"https://hacker-news.firebaseio.com/v0/item/";
 
 @interface HackerNewsCommunicator()
-- (void)fetchContentAtURL:(NSURL*)url;
+- (void)fetchContentAtURL:(NSURL *)url errorHandler:(void(^)(NSError *error))errorBlock successHandler:(void(^)(NSString *objectNotation))successBlock;
+- (void)launchRequest:(NSURLRequest*)request;
 - (NSURL*)itemURLWithIdentifier:(NSInteger)itemID;
 @end
 
 @implementation HackerNewsCommunicator
+
+@synthesize delegate;
+
 - (void)fetchTopStories {
-    [self fetchContentAtURL:[NSURL URLWithString:topStoryURLString]];
+    [self fetchContentAtURL:[NSURL URLWithString:topStoryURLString] errorHandler:^(NSError *error) {
+        
+    } successHandler:^(NSString *objectNotation) {
+        
+    }];
 }
 
 - (void)fetchNewStories {
-    [self fetchContentAtURL:[NSURL URLWithString:newStoryURLString]];
+    [self fetchContentAtURL:[NSURL URLWithString:newStoryURLString] errorHandler:^(NSError *error) {
+
+    } successHandler:^(NSString *objectNotation) {
+        
+    }];
 }
 
 - (void)fetchAskStories {
-    [self fetchContentAtURL:[NSURL URLWithString:askStoryURLString]];
+    [self fetchContentAtURL:[NSURL URLWithString:askStoryURLString] errorHandler:^(NSError *error) {
+        
+    } successHandler:^(NSString *objectNotation) {
+        
+    }];
 }
 
 - (void)fetchShowStories {
-    [self fetchContentAtURL:[NSURL URLWithString:showStoryURLString]];
+    [self fetchContentAtURL:[NSURL URLWithString:showStoryURLString] errorHandler:^(NSError *error) {
+        
+    } successHandler:^(NSString *objectNotation) {
+        
+    }];
 }
 
 - (void)fetchJobStories {
-    [self fetchContentAtURL:[NSURL URLWithString:jobStoryURLString]];
+    [self fetchContentAtURL:[NSURL URLWithString:jobStoryURLString] errorHandler:^(NSError *error) {
+        
+    } successHandler:^(NSString *objectNotation) {
+        
+    }];
 }
 
 - (void)fetchItemForIdentifier:(NSInteger)identifier {
-    [self fetchContentAtURL:[self itemURLWithIdentifier:identifier]];
+    [self fetchContentAtURL:[self itemURLWithIdentifier:identifier] errorHandler:^(NSError *error) {
+        
+    } successHandler:^(NSString *objectNotation) {
+        
+    }];
+}
+
+#pragma mark - NSURLSessionDataDelegate
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response
+ completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler {
+    receivedData = nil;
+}
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
+    
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
+    
 }
 
 #pragma mark - Class Continuation
-- (void)fetchContentAtURL:(NSURL *)url {
+- (void)fetchContentAtURL:(NSURL *)url
+             errorHandler:(void(^)(NSError *error))errorBlock
+           successHandler:(void(^)(NSString *objectNotation))successBlock {
     fetchingURL = url;
+    errorHandler = [errorBlock copy];
+    successHandler = [successBlock copy];
+    NSURLRequest *request = [NSURLRequest requestWithURL:fetchingURL];
+    [self launchRequest:request];
+}
+
+- (void)launchRequest:(NSURLRequest*)request {
+    if (!session) {
+        session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:nil];
+    }
+    
+    [fetchingTask cancel];
+    fetchingTask = [session dataTaskWithRequest:request];
+    [fetchingTask resume];
 }
 
 - (NSURL*)itemURLWithIdentifier:(NSInteger)itemID {

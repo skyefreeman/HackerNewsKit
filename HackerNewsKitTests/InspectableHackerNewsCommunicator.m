@@ -12,4 +12,13 @@
 - (NSURL*)URLToFetch {
     return fetchingURL;
 }
+
+- (NSURLSessionDataTask*)currentSessionTask {
+    return fetchingTask;
+}
+
+- (NSURLSession*)currentSession {
+    return session;
+}
+
 @end

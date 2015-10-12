@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #import "HackerNewsManagerDelegate.h"
+#import "HackerNewsCommunicatorDelegate.h"
+
 #import "HackerNewsCommunicator.h"
 #import "HNItemBuilder.h"
 
@@ -19,7 +20,8 @@ typedef NS_ENUM(NSInteger, HackerNewsManagerErrorCode) {
     HackerNewsManagerErrorCodeTopStories,
 };
 
-@interface HackerNewsManager : NSObject
+@interface HackerNewsManager : NSObject <HackerNewsCommunicatorDelegate>
+
 @property (nonatomic, weak) id <HackerNewsManagerDelegate> delegate;
 @property (strong) HackerNewsCommunicator *communicator;
 @property (strong) HNItemBuilder *itemBuilder;

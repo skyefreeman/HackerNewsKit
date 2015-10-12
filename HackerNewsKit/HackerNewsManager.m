@@ -65,6 +65,7 @@ NSString *HackerNewsManagerError = @"HackerNewsManagerError";
     [self tellDelegateAboutTopStoryFetchError:error];
 }
 
+
 #pragma mark - Class Continuation
 - (void)tellDelegateAboutItemFetchError:(NSError*)error {
     NSDictionary *errorInfo = [self errorInfoFromError:error];
