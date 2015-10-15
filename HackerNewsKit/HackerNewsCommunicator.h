@@ -31,3 +31,5 @@
 - (void)fetchItemForIdentifier:(NSInteger)identifier;
 
 @end
+
+extern NSString *HackerNewsCommunicatorError;

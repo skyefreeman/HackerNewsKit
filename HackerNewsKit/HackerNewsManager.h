@@ -18,6 +18,7 @@ extern NSString *HackerNewsManagerError;
 typedef NS_ENUM(NSInteger, HackerNewsManagerErrorCode) {
     HackerNewsManagerErrorCodeItem,
     HackerNewsManagerErrorCodeTopStories,
+    HackerNewsManagerErrorCodeNewStories,
 };
 
 @interface HackerNewsManager : NSObject <HackerNewsCommunicatorDelegate>

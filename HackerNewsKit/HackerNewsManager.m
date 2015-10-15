@@ -16,8 +16,14 @@ NSString *HackerNewsManagerError = @"HackerNewsManagerError";
 
 @interface HackerNewsManager ()
 
-- (void)tellDelegateAboutTopStoryFetchError:(NSError*)error;
 - (void)tellDelegateAboutItemFetchError:(NSError*)error;
+- (void)tellDelegateAboutTopStoriesFetchError:(NSError*)error;
+- (void)tellDelegateAboutNewStoriesFetchError:(NSError*)error;
+- (void)tellDelegateAboutAskStoriesFetchError:(NSError*)error;
+- (void)tellDelegateAboutShowStoriesFetchError:(NSError*)error;
+- (void)tellDelegateAboutJobStoriesFetchError:(NSError*)error;
+
+- (NSError*)reportablErrorFromError:(NSError*)error domain:(NSString*)errorDomain code:(NSInteger)errorCode;
 - (NSDictionary*)errorInfoFromError:(NSError*)error;
 
 @end
@@ -32,6 +38,32 @@ NSString *HackerNewsManagerError = @"HackerNewsManagerError";
 }
 
 #pragma mark - Hacker News Communicator
+- (void)communicatorItemFetchFailedWithError:(NSError *)error {
+    [self tellDelegateAboutItemFetchError:error];
+}
+
+- (void)communicatorTopStoriesFetchFailedWithError:(NSError *)error {
+    [self tellDelegateAboutTopStoriesFetchError:error];
+}
+
+- (void)communicatorNewStoriesFetchFailedWithError:(NSError*)error {
+    
+}
+//
+
+- (void)communicatorAskStoriesFetchFailedWithError:(NSError*)error {
+    
+}
+
+- (void)communicatorShowStoriesFetchFailedWithError:(NSError*)error {
+    
+}
+
+- (void)communicatorJobStoriesFetchFailedWithError:(NSError*)error {
+    
+}
+
+// Will be refactored
 - (void)fetchTopStories {
     [self.communicator fetchTopStories];
 }
@@ -40,12 +72,13 @@ NSString *HackerNewsManagerError = @"HackerNewsManagerError";
     [self.communicator fetchItemForIdentifier:identifier];
 }
 
+
 #pragma mark - Items
 - (void)receivedTopStoriesJSON:(NSArray*)JSONArray {
     NSError *error = nil;
     NSArray *topStories = [_itemBuilder itemsFromJSONArray:JSONArray error:&error];
     if (!topStories) {
-        [self tellDelegateAboutTopStoryFetchError:error];
+        [self tellDelegateAboutTopStoriesFetchError:error];
     } else {
         [self.delegate didReceiveTopStories:topStories];
     }
@@ -62,23 +95,37 @@ NSString *HackerNewsManagerError = @"HackerNewsManagerError";
 }
 
 - (void)fetchingTopStoriesFailedWithError:(NSError*)error {
-    [self tellDelegateAboutTopStoryFetchError:error];
+    [self tellDelegateAboutTopStoriesFetchError:error];
 }
-
 
 #pragma mark - Class Continuation
 - (void)tellDelegateAboutItemFetchError:(NSError*)error {
-    NSDictionary *errorInfo = [self errorInfoFromError:error];
-    
-    NSError *reportableError = [NSError errorWithDomain:HackerNewsManagerError code:HackerNewsManagerErrorCodeItem userInfo:errorInfo];
+    NSError *reportableError = [self reportablErrorFromError:error domain:HackerNewsManagerError code:HackerNewsManagerErrorCodeItem];
     [self.delegate fetchingTopStoriesFailedWithError:reportableError];
 }
 
-- (void)tellDelegateAboutTopStoryFetchError:(NSError*)error {
-    NSDictionary *errorInfo = [self errorInfoFromError:error];
-    
-    NSError *reportableError = [NSError errorWithDomain:HackerNewsManagerError code:HackerNewsManagerErrorCodeTopStories userInfo:errorInfo];
+- (void)tellDelegateAboutTopStoriesFetchError:(NSError*)error {
+    NSError *reportableError = [self reportablErrorFromError:error domain:HackerNewsManagerError code:HackerNewsManagerErrorCodeTopStories];
     [self.delegate fetchingTopStoriesFailedWithError:reportableError];
+}
+
+- (void)tellDelegateAboutNewStoriesFetchError:(NSError*)error {
+    NSError *reportableError = [self reportablErrorFromError:error domain:HackerNewsManagerError code:HackerNewsManagerErrorCodeNewStories];
+    
+}
+
+- (void)tellDelegateAboutAskStoriesFetchError:(NSError*)error {
+}
+
+- (void)tellDelegateAboutShowStoriesFetchError:(NSError*)error {
+}
+
+- (void)tellDelegateAboutJobStoriesFetchError:(NSError*)error {
+}
+
+- (NSError*)reportablErrorFromError:(NSError*)error domain:(NSString*)errorDomain code:(NSInteger)errorCode {
+    NSDictionary *errorInfo = [self errorInfoFromError:error];
+    return [NSError errorWithDomain:errorDomain code:errorCode userInfo:errorInfo];
 }
 
 - (NSDictionary*)errorInfoFromError:(NSError*)error {

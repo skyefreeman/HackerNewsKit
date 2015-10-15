@@ -10,8 +10,17 @@
 
 @interface MockHackerNewsManager : HackerNewsManager {
     NSInteger itemFailureErrorCode;
+    NSInteger topStoriesFailureErrorCode;
+    NSInteger newStoriesFailureErrorCode;
+    NSInteger askStoriesFailureErrorCode;
+    NSInteger showStoriesFailureErrorCode;
+    NSInteger jobStoriesFailureErrorCode;
 }
 
 - (NSInteger)itemFailureErrorCode;
-
+- (NSInteger)topStoriesFailureErrorCode;
+- (NSInteger)newStoriesFailureErrorCode;
+- (NSInteger)askStoriesFailureErrorCode;
+- (NSInteger)showStoriesFailureErrorCode;
+- (NSInteger)jobStoriesFailureErrorCode;
 @end

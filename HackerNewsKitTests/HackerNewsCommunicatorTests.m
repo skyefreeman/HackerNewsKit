@@ -106,20 +106,53 @@ static NSInteger testIdentifier = 123;
 - (void)testReceivingResponseDiscardsExistingData {
     nnCommunicator.receivedData = [@"Data" dataUsingEncoding:NSUTF8StringEncoding];
     [nnCommunicator fetchItemForIdentifier:123];
-    
-    [nnCommunicator URLSession:[communicator currentSession] dataTask:[communicator currentSessionTask] didReceiveResponse:(NSURLResponse*)fourOhFourResponse completionHandler:^(NSURLSessionResponseDisposition disposition) {}];
+    [self fourOhFourResponseCall];
     XCTAssertEqual([nnCommunicator.receivedData length], (NSUInteger)0, @"Data should have been discarded");
 }
 
 - (void)testReceiving404StatusPassesErrorToDelegate {
     [nnCommunicator fetchItemForIdentifier:123];
-    [nnCommunicator URLSession:[communicator currentSession] dataTask:[communicator currentSessionTask] didReceiveResponse:(NSURLResponse*)fourOhFourResponse completionHandler:^(NSURLSessionResponseDisposition disposition) {}];
+    [self fourOhFourResponseCall];
     XCTAssertEqual([manager itemFailureErrorCode], 404, @"404 Error code should be passed to the delegate");
+}
+
+- (void)testReceiving404StatusForTopStoriesPassesErrorToDelegate {
+    [nnCommunicator fetchTopStories];
+    [self fourOhFourResponseCall];
+    XCTAssertEqual([manager topStoriesFailureErrorCode], 404, @"404 error code should be passed to delegate");
+}
+
+- (void)testReceiving404StatusForNewStoriesPassesErrorToDelegate {
+    [nnCommunicator fetchNewStories];
+    [self fourOhFourResponseCall];
+    XCTAssertEqual([manager newStoriesFailureErrorCode], 404, @"404 error code should be passed to delegate");
+}
+
+- (void)testReceiving404StatusForAskStoriesPassesErrorToDelegate {
+    [nnCommunicator fetchAskStories];
+    [self fourOhFourResponseCall];
+    XCTAssertEqual([manager askStoriesFailureErrorCode], 404, @"404 error code should be passed to delegate");
+}
+
+- (void)testReceiving404StatusForShowStoriesPassesErrorToDelegate {
+    [nnCommunicator fetchShowStories];
+    [self fourOhFourResponseCall];
+    XCTAssertEqual([manager showStoriesFailureErrorCode], 404, @"404 error code should be passed to delegate");
+}
+
+- (void)testReceiving404StatusForJobStoriesPassesErrorToDelegate {
+    [nnCommunicator fetchJobStories];
+    [self fourOhFourResponseCall];
+    XCTAssertEqual([manager jobStoriesFailureErrorCode], 404, @"404 error code should be passed to delegate");
 }
 
 #pragma mark - Convenience
 - (NSString*)fetchedURLString {
     return [[communicator URLToFetch] absoluteString];
+}
+
+- (void)fourOhFourResponseCall {
+    [nnCommunicator URLSession:[communicator currentSession] dataTask:[communicator currentSessionTask] didReceiveResponse:(NSURLResponse*)fourOhFourResponse completionHandler:^(NSURLSessionResponseDisposition disposition) {}];
 }
 
 @end

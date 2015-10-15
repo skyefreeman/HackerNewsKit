@@ -9,5 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @protocol HackerNewsCommunicatorDelegate <NSObject>
+- (void)communicatorItemFetchFailedWithError:(NSError*)error;
+- (void)communicatorTopStoriesFetchFailedWithError:(NSError*)error;
+
+- (void)communicatorNewStoriesFetchFailedWithError:(NSError*)error;
+- (void)communicatorAskStoriesFetchFailedWithError:(NSError*)error;
+- (void)communicatorShowStoriesFetchFailedWithError:(NSError*)error;
+- (void)communicatorJobStoriesFetchFailedWithError:(NSError*)error;
+
 
 @end
