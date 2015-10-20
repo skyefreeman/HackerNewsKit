@@ -23,7 +23,7 @@ NSString *HackerNewsManagerError = @"HackerNewsManagerError";
 - (void)tellDelegateAboutShowStoriesFetchError:(NSError*)error;
 - (void)tellDelegateAboutJobStoriesFetchError:(NSError*)error;
 
-- (NSError*)reportablErrorFromError:(NSError*)error domain:(NSString*)errorDomain code:(NSInteger)errorCode;
+- (NSError*)reportableErrorFromError:(NSError*)error domain:(NSString*)errorDomain code:(NSInteger)errorCode;
 - (NSDictionary*)errorInfoFromError:(NSError*)error;
 
 @end
@@ -47,7 +47,7 @@ NSString *HackerNewsManagerError = @"HackerNewsManagerError";
 }
 
 - (void)communicatorNewStoriesFetchFailedWithError:(NSError*)error {
-    
+
 }
 //
 
@@ -71,7 +71,6 @@ NSString *HackerNewsManagerError = @"HackerNewsManagerError";
 - (void)fetchItemForIdentifier:(NSInteger)identifier {
     [self.communicator fetchItemForIdentifier:identifier];
 }
-
 
 #pragma mark - Items
 - (void)receivedTopStoriesJSON:(NSArray*)JSONArray {
@@ -100,18 +99,17 @@ NSString *HackerNewsManagerError = @"HackerNewsManagerError";
 
 #pragma mark - Class Continuation
 - (void)tellDelegateAboutItemFetchError:(NSError*)error {
-    NSError *reportableError = [self reportablErrorFromError:error domain:HackerNewsManagerError code:HackerNewsManagerErrorCodeItem];
+    NSError *reportableError = [self reportableErrorFromError:error domain:HackerNewsManagerError code:HackerNewsManagerErrorCodeItem];
     [self.delegate fetchingTopStoriesFailedWithError:reportableError];
 }
 
 - (void)tellDelegateAboutTopStoriesFetchError:(NSError*)error {
-    NSError *reportableError = [self reportablErrorFromError:error domain:HackerNewsManagerError code:HackerNewsManagerErrorCodeTopStories];
+    NSError *reportableError = [self reportableErrorFromError:error domain:HackerNewsManagerError code:HackerNewsManagerErrorCodeTopStories];
     [self.delegate fetchingTopStoriesFailedWithError:reportableError];
 }
 
 - (void)tellDelegateAboutNewStoriesFetchError:(NSError*)error {
-    NSError *reportableError = [self reportablErrorFromError:error domain:HackerNewsManagerError code:HackerNewsManagerErrorCodeNewStories];
-    
+//    NSError *reportableError = [self reportableErrorFromError:error domain:HackerNewsManagerError code:HackerNewsManagerErrorCodeNewStories];
 }
 
 - (void)tellDelegateAboutAskStoriesFetchError:(NSError*)error {
@@ -123,7 +121,7 @@ NSString *HackerNewsManagerError = @"HackerNewsManagerError";
 - (void)tellDelegateAboutJobStoriesFetchError:(NSError*)error {
 }
 
-- (NSError*)reportablErrorFromError:(NSError*)error domain:(NSString*)errorDomain code:(NSInteger)errorCode {
+- (NSError*)reportableErrorFromError:(NSError*)error domain:(NSString*)errorDomain code:(NSInteger)errorCode {
     NSDictionary *errorInfo = [self errorInfoFromError:error];
     return [NSError errorWithDomain:errorDomain code:errorCode userInfo:errorInfo];
 }

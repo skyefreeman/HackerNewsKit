@@ -32,7 +32,7 @@ static NSString *baseItemURLString = @"https://hacker-news.firebaseio.com/v0/ite
     [self fetchContentAtURL:[NSURL URLWithString:topStoryURLString] errorHandler:^(NSError *error) {
         [delegate communicatorTopStoriesFetchFailedWithError:error];
     } successHandler:^(NSString *objectNotation) {
-        
+
     }];
 }
 
@@ -72,7 +72,7 @@ static NSString *baseItemURLString = @"https://hacker-news.firebaseio.com/v0/ite
     [self fetchContentAtURL:[self itemURLWithIdentifier:identifier] errorHandler:^(NSError *error) {
         [delegate communicatorItemFetchFailedWithError:error];
     } successHandler:^(NSString *objectNotation) {
-        
+        [delegate recievedItemWithJSON:objectNotation];
     }];
 }
 
@@ -85,15 +85,24 @@ static NSString *baseItemURLString = @"https://hacker-news.firebaseio.com/v0/ite
         NSError *error = [NSError errorWithDomain:HackerNewsCommunicatorError code:[httpResponse statusCode] userInfo:nil];
         errorHandler(error);
         [fetchingTask cancel];
+    } else {
+        receivedData = [[NSMutableData alloc] init];
+        completionHandler(NSURLSessionResponseAllow);
     }
 }
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
-    
+    [receivedData appendData:data];
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
-    
+    if (error) {
+        errorHandler(error);
+    } else {
+        NSString *recievedText = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+        receivedData = nil;
+        successHandler(recievedText);
+    }
 }
 
 #pragma mark - Class Continuation

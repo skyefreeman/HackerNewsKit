@@ -15,6 +15,8 @@
     NSInteger askStoriesFailureErrorCode;
     NSInteger showStoriesFailureErrorCode;
     NSInteger jobStoriesFailureErrorCode;
+    
+    NSString *fetchedItemString;
 }
 
 - (NSInteger)itemFailureErrorCode;
@@ -23,4 +25,6 @@
 - (NSInteger)askStoriesFailureErrorCode;
 - (NSInteger)showStoriesFailureErrorCode;
 - (NSInteger)jobStoriesFailureErrorCode;
+
+- (NSString*)fetchedItemString;
 @end

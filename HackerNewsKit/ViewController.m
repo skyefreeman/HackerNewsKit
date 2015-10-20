@@ -7,21 +7,19 @@
 //
 
 #import "ViewController.h"
+#import "HackerNewsCommunicator.h"
 
-@interface ViewController ()
-
+@interface ViewController () <HackerNewsCommunicatorDelegate>
+@property (nonatomic) HackerNewsCommunicator *communicator;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    self.communicator = [[HackerNewsCommunicator alloc] init];
+    [self.communicator fetchItemForIdentifier:14];
 }
 
 @end

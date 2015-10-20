@@ -30,7 +30,6 @@ static NSInteger testIdentifier = 123;
     InspectableHackerNewsCommunicator *communicator;
     NonNetworkedHackerNewsCommunicator *nnCommunicator;
     MockHackerNewsManager *manager;
-    FakeURLResponse *fourOhFourResponse;
 
     NSData *recievedData;
 }
@@ -41,7 +40,6 @@ static NSInteger testIdentifier = 123;
     nnCommunicator = [[NonNetworkedHackerNewsCommunicator alloc] init];
     manager = [[MockHackerNewsManager alloc] init];
     nnCommunicator.delegate = manager;
-    fourOhFourResponse = [[FakeURLResponse alloc] initWithStatusCode:404];
     recievedData = [@"Result" dataUsingEncoding:NSUTF8StringEncoding];
 }
 
@@ -49,7 +47,6 @@ static NSInteger testIdentifier = 123;
     communicator = nil;
     nnCommunicator = nil;
     manager = nil;
-    fourOhFourResponse = nil;
     recievedData = nil;
     [super tearDown];
 }
@@ -106,44 +103,68 @@ static NSInteger testIdentifier = 123;
 - (void)testReceivingResponseDiscardsExistingData {
     nnCommunicator.receivedData = [@"Data" dataUsingEncoding:NSUTF8StringEncoding];
     [nnCommunicator fetchItemForIdentifier:123];
-    [self fourOhFourResponseCall];
+    [self responseCallWithStatusCode:1];
     XCTAssertEqual([nnCommunicator.receivedData length], (NSUInteger)0, @"Data should have been discarded");
 }
 
 - (void)testReceiving404StatusPassesErrorToDelegate {
     [nnCommunicator fetchItemForIdentifier:123];
-    [self fourOhFourResponseCall];
+    [self responseCallWithStatusCode:404];
     XCTAssertEqual([manager itemFailureErrorCode], 404, @"404 Error code should be passed to the delegate");
 }
 
 - (void)testReceiving404StatusForTopStoriesPassesErrorToDelegate {
     [nnCommunicator fetchTopStories];
-    [self fourOhFourResponseCall];
+    [self responseCallWithStatusCode:404];
     XCTAssertEqual([manager topStoriesFailureErrorCode], 404, @"404 error code should be passed to delegate");
 }
 
 - (void)testReceiving404StatusForNewStoriesPassesErrorToDelegate {
     [nnCommunicator fetchNewStories];
-    [self fourOhFourResponseCall];
+    [self responseCallWithStatusCode:404];
     XCTAssertEqual([manager newStoriesFailureErrorCode], 404, @"404 error code should be passed to delegate");
 }
 
 - (void)testReceiving404StatusForAskStoriesPassesErrorToDelegate {
     [nnCommunicator fetchAskStories];
-    [self fourOhFourResponseCall];
+    [self responseCallWithStatusCode:404];
     XCTAssertEqual([manager askStoriesFailureErrorCode], 404, @"404 error code should be passed to delegate");
 }
 
 - (void)testReceiving404StatusForShowStoriesPassesErrorToDelegate {
     [nnCommunicator fetchShowStories];
-    [self fourOhFourResponseCall];
+    [self responseCallWithStatusCode:404];
     XCTAssertEqual([manager showStoriesFailureErrorCode], 404, @"404 error code should be passed to delegate");
 }
 
 - (void)testReceiving404StatusForJobStoriesPassesErrorToDelegate {
     [nnCommunicator fetchJobStories];
-    [self fourOhFourResponseCall];
+    [self responseCallWithStatusCode:404];
     XCTAssertEqual([manager jobStoriesFailureErrorCode], 404, @"404 error code should be passed to delegate");
+}
+
+- (void)testNoErrorWith200ConnectionResponse {
+    [nnCommunicator fetchItemForIdentifier:123];
+    [self responseCallWithStatusCode:200];
+    XCTAssertFalse([manager itemFailureErrorCode] == 200, @"There should not be an error with a successful response");
+}
+
+- (void)testConnectionErrorPassesErrorToDelegate {
+    [nnCommunicator fetchItemForIdentifier:123];
+    NSError *error = [NSError errorWithDomain:@"Test Domain" code:123 userInfo:nil];
+    [self sessionDidCompleteWithError:error];
+    XCTAssertEqual([manager itemFailureErrorCode], error.code, @"A connection failure should pass an error to the delegate");
+}
+
+- (void)testSuccessfulItemFetchPassesDataToDelegate {
+    [nnCommunicator fetchItemForIdentifier:123];
+    [nnCommunicator setReceivedData:recievedData];
+    [self sessionDidCompleteWithError:nil];
+    XCTAssertTrue([[manager fetchedItemString] isEqualToString:@"Result"],@"A successful item fetch should pass recieved data to its delegate");
+}
+
+- (void)testSuccessfulTopStoryFetchPassesDataToDelegate {
+    XCTAssertTrue([[manager fetchedTopStoryString] isEqualToString:@"Result"],@"A successful story fetch should pass recieved data to its delegate");
 }
 
 #pragma mark - Convenience
@@ -151,8 +172,14 @@ static NSInteger testIdentifier = 123;
     return [[communicator URLToFetch] absoluteString];
 }
 
-- (void)fourOhFourResponseCall {
-    [nnCommunicator URLSession:[communicator currentSession] dataTask:[communicator currentSessionTask] didReceiveResponse:(NSURLResponse*)fourOhFourResponse completionHandler:^(NSURLSessionResponseDisposition disposition) {}];
+- (void)responseCallWithStatusCode:(NSInteger)statusCode {
+    FakeURLResponse *response = [[FakeURLResponse alloc] initWithStatusCode:statusCode];
+    [nnCommunicator URLSession:[communicator currentSession] dataTask:[communicator currentSessionTask] didReceiveResponse:(NSURLResponse*)response completionHandler:^(NSURLSessionResponseDisposition disposition) {}];
 }
+
+- (void)sessionDidCompleteWithError:(NSError*)error {
+    [nnCommunicator URLSession:[communicator currentSession] task:[communicator currentSessionTask] didCompleteWithError:error];
+}
+
 
 @end

@@ -10,6 +10,7 @@
 
 @implementation MockHackerNewsManager
 
+#pragma mark - Error Codes
 - (NSInteger)itemFailureErrorCode {
     return itemFailureErrorCode;
 }
@@ -32,6 +33,11 @@
 
 - (NSInteger)jobStoriesFailureErrorCode {
     return jobStoriesFailureErrorCode;
+}
+
+#pragma mark - Successful Fetch Strings
+- (NSString*)fetchedItemString {
+    return fetchedItemString;
 }
 
 #pragma mark - HackerNewsCommunicatorDelegate
@@ -57,6 +63,11 @@
 
 - (void)communicatorJobStoriesFetchFailedWithError:(NSError*)error {
     jobStoriesFailureErrorCode = [error code];
+}
+
+- (void)recievedItemWithJSON:(NSString *)objectNotation {
+    NSLog(@"receivedItemJSON: %@",objectNotation);
+    fetchedItemString = objectNotation;
 }
 
 @end
