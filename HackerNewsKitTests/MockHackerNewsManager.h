@@ -17,6 +17,11 @@
     NSInteger jobStoriesFailureErrorCode;
     
     NSString *fetchedItemString;
+    NSString *fetchedTopStoryString;
+    NSString *fetchedNewStoryString;
+    NSString *fetchedAskStoryString;
+    NSString *fetchedShowStoryString;
+    NSString *fetchedJobsStoryString;
 }
 
 - (NSInteger)itemFailureErrorCode;
@@ -27,4 +32,10 @@
 - (NSInteger)jobStoriesFailureErrorCode;
 
 - (NSString*)fetchedItemString;
+- (NSString*)fetchedTopStoryString;
+- (NSString*)fetchedNewStoryString;
+- (NSString*)fetchedAskStoryString;
+- (NSString*)fetchedShowStoryString;
+- (NSString*)fetchedJobsStoryString;
+
 @end

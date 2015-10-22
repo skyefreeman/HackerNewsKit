@@ -7,19 +7,33 @@
 //
 
 #import "ViewController.h"
-#import "HackerNewsCommunicator.h"
+#import "HackerNewsManager.h"
 
-@interface ViewController () <HackerNewsCommunicatorDelegate>
-@property (nonatomic) HackerNewsCommunicator *communicator;
+#import "HNItem.h"
+@interface ViewController () <HackerNewsManagerDelegate>
+@property (nonatomic) HackerNewsManager *manager;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.communicator = [[HackerNewsCommunicator alloc] init];
-    [self.communicator fetchItemForIdentifier:14];
+
+    self.manager = [[HackerNewsManager alloc] init];
+    self.manager.delegate = self;
+    [self.manager fetchItemForIdentifier:1];
 }
 
+- (void)didReceiveItem:(HNItem *)item {
+    NSLog(@"%@",item.title);
+}
+
+- (void)didReceiveTopStories:(NSArray *)topStories {
+}
+
+- (void)hackerNewsItemFetchFailedWithError:(NSError *)error {
+}
+
+- (void)hackerNewsTopStoriesFetchFailedWithError:(NSError *)error {
+}
 @end

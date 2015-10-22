@@ -40,6 +40,26 @@
     return fetchedItemString;
 }
 
+- (NSString*)fetchedTopStoryString {
+    return fetchedTopStoryString;
+}
+
+- (NSString*)fetchedNewStoryString {
+    return fetchedNewStoryString;
+}
+
+- (NSString*)fetchedAskStoryString {
+    return fetchedAskStoryString;
+}
+
+- (NSString*)fetchedShowStoryString {
+    return fetchedShowStoryString;
+}
+
+- (NSString*)fetchedJobsStoryString {
+    return fetchedJobsStoryString;
+}
+
 #pragma mark - HackerNewsCommunicatorDelegate
 - (void)communicatorItemFetchFailedWithError:(NSError *)error {
     itemFailureErrorCode = [error code];
@@ -65,9 +85,28 @@
     jobStoriesFailureErrorCode = [error code];
 }
 
-- (void)recievedItemWithJSON:(NSString *)objectNotation {
-    NSLog(@"receivedItemJSON: %@",objectNotation);
-    fetchedItemString = objectNotation;
+- (void)recievedItemWithJSON:(NSString*)objectNotation {
+     fetchedItemString = objectNotation;
+}
+
+- (void)recievedTopStoriesWithJSON:(NSString *)objectNotation {
+    fetchedTopStoryString = objectNotation;
+}
+
+- (void)recievedNewStoriesWithJSON:(NSString*)objectNotation {
+    fetchedNewStoryString = objectNotation;
+}
+
+- (void)recievedAskStoriesWithJSON:(NSString*)objectNotation {
+    fetchedAskStoryString = objectNotation;
+}
+
+- (void)recievedShowStoriesWithJSON:(NSString*)objectNotation {
+    fetchedShowStoryString = objectNotation;
+}
+
+- (void)recievedJobsStoriesWithJSON:(NSString*)objectNotation {
+    fetchedJobsStoryString = objectNotation;
 }
 
 @end

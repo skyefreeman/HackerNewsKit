@@ -19,5 +19,10 @@
 - (void)communicatorJobStoriesFetchFailedWithError:(NSError*)error;
 
 - (void)recievedItemWithJSON:(NSString*)objectNotation;
+- (void)recievedTopStoriesWithJSON:(NSString*)objectNotation;
+- (void)recievedNewStoriesWithJSON:(NSString*)objectNotation;
+- (void)recievedAskStoriesWithJSON:(NSString*)objectNotation;
+- (void)recievedShowStoriesWithJSON:(NSString*)objectNotation;
+- (void)recievedJobsStoriesWithJSON:(NSString*)objectNotation;
 
 @end

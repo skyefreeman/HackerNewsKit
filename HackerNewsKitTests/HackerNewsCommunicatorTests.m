@@ -158,13 +158,38 @@ static NSInteger testIdentifier = 123;
 
 - (void)testSuccessfulItemFetchPassesDataToDelegate {
     [nnCommunicator fetchItemForIdentifier:123];
-    [nnCommunicator setReceivedData:recievedData];
-    [self sessionDidCompleteWithError:nil];
+    [self simulateSuccessfulRequest];
     XCTAssertTrue([[manager fetchedItemString] isEqualToString:@"Result"],@"A successful item fetch should pass recieved data to its delegate");
 }
 
-- (void)testSuccessfulTopStoryFetchPassesDataToDelegate {
-    XCTAssertTrue([[manager fetchedTopStoryString] isEqualToString:@"Result"],@"A successful story fetch should pass recieved data to its delegate");
+- (void)testSuccessfulTopStoriesFetchPassesDataToDelegate {
+    [nnCommunicator fetchTopStories];
+    [self simulateSuccessfulRequest];
+    XCTAssertTrue([[manager fetchedTopStoryString] isEqualToString:@"Result"],@"A successful top story fetch should pass recieved data to its delegate");
+}
+
+- (void)testSuccessfulNewStoriesFetchPassesDataToDelegate {
+    [nnCommunicator fetchNewStories];
+    [self simulateSuccessfulRequest];
+    XCTAssertTrue([[manager fetchedNewStoryString] isEqualToString:@"Result"],@"A successful  new story fetch should pass recieved data to its delegate");
+}
+
+- (void)testSuccessfulAskStoriesFetchPassesDataToDelegate {
+    [nnCommunicator fetchAskStories];
+    [self simulateSuccessfulRequest];
+    XCTAssertTrue([[manager fetchedAskStoryString] isEqualToString:@"Result"],@"A successful  ask story fetch should pass recieved data to its delegate");
+}
+
+- (void)testSuccessfulShowStoriesFetchPassesDataToDelegate {
+    [nnCommunicator fetchShowStories];
+    [self simulateSuccessfulRequest];
+    XCTAssertTrue([[manager fetchedShowStoryString] isEqualToString:@"Result"],@"A successful  show story fetch should pass recieved data to its delegate");
+}
+
+- (void)testSuccessfulJobsStoriesFetchPassesDataToDelegate {
+    [nnCommunicator fetchJobStories];
+    [self simulateSuccessfulRequest];
+    XCTAssertTrue([[manager fetchedJobsStoryString] isEqualToString:@"Result"],@"A successful  jobs story fetch should pass recieved data to its delegate");
 }
 
 #pragma mark - Convenience
@@ -181,5 +206,9 @@ static NSInteger testIdentifier = 123;
     [nnCommunicator URLSession:[communicator currentSession] task:[communicator currentSessionTask] didCompleteWithError:error];
 }
 
+- (void)simulateSuccessfulRequest {
+    [nnCommunicator setReceivedData:recievedData];
+    [self sessionDidCompleteWithError:nil];
+}
 
 @end

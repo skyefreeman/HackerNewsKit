@@ -8,15 +8,12 @@
 
 #import "HackerNewsCommunicator.h"
 
+static NSString *baseItemURLString = @"https://hacker-news.firebaseio.com/v0/item/";
 static NSString *topStoryURLString = @"https://hacker-news.firebaseio.com/v0/topstories.json";
 static NSString *newStoryURLString = @"https://hacker-news.firebaseio.com/v0/newstories.json";
 static NSString *askStoryURLString = @"https://hacker-news.firebaseio.com/v0/askstories.json";
 static NSString *showStoryURLString = @"https://hacker-news.firebaseio.com/v0/showstories.json";
 static NSString *jobStoryURLString = @"https://hacker-news.firebaseio.com/v0/jobstories.json";
-
-static NSString *baseItemURLString = @"https://hacker-news.firebaseio.com/v0/item/";
-
-
 
 @interface HackerNewsCommunicator()
 - (void)fetchContentAtURL:(NSURL *)url errorHandler:(void(^)(NSError *error))errorBlock successHandler:(void(^)(NSString *objectNotation))successBlock;
@@ -32,7 +29,7 @@ static NSString *baseItemURLString = @"https://hacker-news.firebaseio.com/v0/ite
     [self fetchContentAtURL:[NSURL URLWithString:topStoryURLString] errorHandler:^(NSError *error) {
         [delegate communicatorTopStoriesFetchFailedWithError:error];
     } successHandler:^(NSString *objectNotation) {
-
+        [delegate recievedTopStoriesWithJSON:objectNotation];
     }];
 }
 
@@ -40,7 +37,7 @@ static NSString *baseItemURLString = @"https://hacker-news.firebaseio.com/v0/ite
     [self fetchContentAtURL:[NSURL URLWithString:newStoryURLString] errorHandler:^(NSError *error) {
         [delegate communicatorNewStoriesFetchFailedWithError:error];
     } successHandler:^(NSString *objectNotation) {
-        
+        [delegate recievedNewStoriesWithJSON:objectNotation];
     }];
 }
 
@@ -48,7 +45,7 @@ static NSString *baseItemURLString = @"https://hacker-news.firebaseio.com/v0/ite
     [self fetchContentAtURL:[NSURL URLWithString:askStoryURLString] errorHandler:^(NSError *error) {
         [delegate communicatorAskStoriesFetchFailedWithError:error];
     } successHandler:^(NSString *objectNotation) {
-        
+        [delegate recievedAskStoriesWithJSON:objectNotation];
     }];
 }
 
@@ -56,7 +53,7 @@ static NSString *baseItemURLString = @"https://hacker-news.firebaseio.com/v0/ite
     [self fetchContentAtURL:[NSURL URLWithString:showStoryURLString] errorHandler:^(NSError *error) {
         [delegate communicatorShowStoriesFetchFailedWithError:error];
     } successHandler:^(NSString *objectNotation) {
-        
+        [delegate recievedShowStoriesWithJSON:objectNotation];
     }];
 }
 
@@ -64,7 +61,7 @@ static NSString *baseItemURLString = @"https://hacker-news.firebaseio.com/v0/ite
     [self fetchContentAtURL:[NSURL URLWithString:jobStoryURLString] errorHandler:^(NSError *error) {
         [delegate communicatorJobStoriesFetchFailedWithError:error];
     } successHandler:^(NSString *objectNotation) {
-        
+        [delegate recievedJobsStoriesWithJSON:objectNotation];
     }];
 }
 

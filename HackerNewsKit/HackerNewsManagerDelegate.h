@@ -10,8 +10,8 @@
 @class HNItem;
 
 @protocol HackerNewsManagerDelegate <NSObject>
-- (void)fetchingTopStoriesFailedWithError:(NSError*)error;
-- (void)fetchingItemFailedWithError:(NSError*)error;
+- (void)hackerNewsTopStoriesFetchFailedWithError:(NSError*)error;
+- (void)hackerNewsItemFetchFailedWithError:(NSError*)error;
 
 - (void)didReceiveTopStories:(NSArray*)topStories;
 - (void)didReceiveItem:(HNItem*)item;

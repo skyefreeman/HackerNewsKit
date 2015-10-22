@@ -9,11 +9,11 @@
 #import "MockHackerNewsManagerDelegate.h"
 
 @implementation MockHackerNewsManagerDelegate
-- (void)fetchingTopStoriesFailedWithError:(NSError *)error {
+- (void)hackerNewsTopStoriesFetchFailedWithError:(NSError *)error {
     self.fetchError = error;
 }
 
-- (void)fetchingItemFailedWithError:(NSError *)error {
+- (void)hackerNewsItemFetchFailedWithError:(NSError *)error {
     self.fetchError = error;
 }
 
