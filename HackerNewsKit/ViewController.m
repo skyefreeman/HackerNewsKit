@@ -8,8 +8,8 @@
 
 #import "ViewController.h"
 #import "HackerNewsManager.h"
-
 #import "HNItem.h"
+
 @interface ViewController () <HackerNewsManagerDelegate>
 @property (nonatomic) HackerNewsManager *manager;
 @end
@@ -21,7 +21,7 @@
 
     self.manager = [[HackerNewsManager alloc] init];
     self.manager.delegate = self;
-    [self.manager fetchItemForIdentifier:1];
+    [self.manager fetchTopStories];
 }
 
 - (void)didReceiveItem:(HNItem *)item {
@@ -29,6 +29,7 @@
 }
 
 - (void)didReceiveTopStories:(NSArray *)topStories {
+    NSLog(@"%@",topStories);
 }
 
 - (void)hackerNewsItemFetchFailedWithError:(NSError *)error {

@@ -73,6 +73,14 @@ static NSString *jobStoryURLString = @"https://hacker-news.firebaseio.com/v0/job
     }];
 }
 
+- (void)fetchItemForIdentifier:(NSInteger)identifier completion:(void (^)(NSString *objectNotation, NSError *error))completion {
+    [self fetchContentAtURL:[self itemURLWithIdentifier:identifier] errorHandler:^(NSError *error) {
+        if (completion) completion(nil,error);
+    } successHandler:^(NSString *objectNotation) {
+        if (completion) completion(objectNotation,nil);
+    }];
+}
+
 #pragma mark - NSURLSessionDataDelegate
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response
  completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler {

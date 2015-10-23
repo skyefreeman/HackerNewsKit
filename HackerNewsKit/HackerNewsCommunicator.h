@@ -29,6 +29,7 @@
 - (void)fetchShowStories;
 - (void)fetchJobStories;
 - (void)fetchItemForIdentifier:(NSInteger)identifier;
+- (void)fetchItemForIdentifier:(NSInteger)identifier completion:(void (^)(NSString *objectNotation, NSError *error))completion;
 
 @end
 

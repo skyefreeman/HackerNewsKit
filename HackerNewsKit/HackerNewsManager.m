@@ -50,12 +50,12 @@ NSString *HackerNewsManagerError = @"HackerNewsManagerError";
 }
 
 #pragma mark - Stories
-- (void)fetchTopStories {
-    [self.communicator fetchTopStories];
-}
-
 - (void)fetchItemForIdentifier:(NSInteger)identifier {
     [self.communicator fetchItemForIdentifier:identifier];
+}
+
+- (void)fetchTopStories {
+    [self.communicator fetchTopStories];
 }
 
 #pragma mark - HackerNewsCommunicator Delegate
@@ -67,16 +67,16 @@ NSString *HackerNewsManagerError = @"HackerNewsManagerError";
     [self tellDelegateAboutTopStoriesFetchError:error];
 }
 
-- (void)communicatorNewStoriesFetchFailedWithError:(NSError*)error {
+- (void)communicatorNewStoriesFetchFailedWithError:(NSError *)error {
 }
 
-- (void)communicatorAskStoriesFetchFailedWithError:(NSError*)error {
+- (void)communicatorAskStoriesFetchFailedWithError:(NSError *)error {
 }
 
-- (void)communicatorShowStoriesFetchFailedWithError:(NSError*)error {
+- (void)communicatorShowStoriesFetchFailedWithError:(NSError *)error {
 }
 
-- (void)communicatorJobStoriesFetchFailedWithError:(NSError*)error {
+- (void)communicatorJobStoriesFetchFailedWithError:(NSError *)error {
 }
 
 - (void)recievedItemWithJSON:(NSString *)objectNotation {
@@ -90,13 +90,15 @@ NSString *HackerNewsManagerError = @"HackerNewsManagerError";
 }
 
 - (void)recievedTopStoriesWithJSON:(NSString *)objectNotation {
-//    NSError *error = nil;
-//    NSArray *topStories = [_itemBuilder itemsFromJSONArray:JSONArray error:&error];
-//    if (!topStories) {
-//        [self tellDelegateAboutTopStoriesFetchError:error];
-//    } else {
-//        [self.delegate didReceiveTopStories:topStories];
-//    }
+    [self performItemRequestsWithIdentifiers:objectNotation withCompletion:^(NSArray *itemObjects) {
+        NSError *error = nil;
+        NSArray *topStories = [_itemBuilder itemsFromJSONArray:itemObjects error:&error];
+        if (!topStories) {
+            [self tellDelegateAboutTopStoriesFetchError:error];
+        } else {
+            [self.delegate didReceiveTopStories:topStories];
+        }
+    }];
 }
 
 - (void)recievedNewStoriesWithJSON:(NSString *)objectNotation {
@@ -111,6 +113,33 @@ NSString *HackerNewsManagerError = @"HackerNewsManagerError";
 - (void)recievedJobsStoriesWithJSON:(NSString *)objectNotation {
 }
 
+#pragma mark - Perform multiple story requests
+- (void)performItemRequestsWithIdentifiers:(NSString *)objectNotation
+                            withCompletion:(void (^)(NSArray *itemObjects))completion
+{
+    NSError *localError = nil;
+    NSData *unicodeNotation = [objectNotation dataUsingEncoding: NSUTF8StringEncoding];
+    id jsonObject = [NSJSONSerialization JSONObjectWithData:unicodeNotation options: 0 error:&localError];
+    
+    NSMutableArray *itemObjects = [NSMutableArray array];
+    dispatch_group_t group = dispatch_group_create();
+    for (int i = 0; i < 30; i++) {
+        
+        dispatch_group_enter(group);
+        NSString *IDString = jsonObject[i];
+        HackerNewsCommunicator *communicator = [[HackerNewsCommunicator alloc] init];
+        [communicator fetchItemForIdentifier:[IDString integerValue] completion:^(NSString *objectNotation, NSError *error) {
+            if (objectNotation) {
+                [itemObjects addObject:objectNotation];
+            }
+            dispatch_group_leave(group);
+        }];
+    }
+
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        if (completion) completion([NSArray arrayWithArray:itemObjects]);
+    });
+}
 
 #pragma mark - Class Continuation
 - (void)tellDelegateAboutItemFetchError:(NSError*)error {

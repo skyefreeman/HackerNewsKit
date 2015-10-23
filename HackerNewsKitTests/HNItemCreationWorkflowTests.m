@@ -90,11 +90,15 @@
     XCTAssertFalse(underlyingError == [delegate fetchError],@"Error should be at the correct level of abstraction.");
 }
 
-- (void)testErrorReturnedToDelegateDocumentsUnderlyingError {
+- (void)testErrorReturnedToDelegateByTopStoryFetchDocumentsUnderlyingError {
     [manager communicatorTopStoriesFetchFailedWithError:underlyingError];
-    XCTAssertEqualObjects([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey], underlyingError, @"The underlying error should be available to client code");
+    XCTAssertEqualObjects([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey], underlyingError, @"The underlying error should be available to client code when fetching top stories fails");
 }
 
+- (void)testErrorReturnedToDelegateByItemFetchDocumentsUnderlyingError {
+    [manager communicatorItemFetchFailedWithError:underlyingError];
+    XCTAssertEqualObjects([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey],underlyingError, @"The underlying error should be available to client code when fetching an item fails");
+}
 #pragma mark - Item
 - (void)testItemJSONIsPassedToItemBuilder {
     [manager recievedItemWithJSON:@"Fake JSON"];
@@ -121,30 +125,30 @@
 }
 
 #pragma mark - Top stories
-//- (void)testItemArrayIsPassedToBuilder {
-//    [manager recievedTopStoriesWithJSON:@"Fake JSON"];
-//    XCTAssertEqualObjects(builder.JSONArray, @[@"Fake JSON"], @"Array of items needs to be passed to the builder");
-//}
-//
-//- (void)testEmptyArrayIsPassedToDelegate {
-//    builder.arrayToReturn = [NSArray array];
-//    [manager recievedTopStoriesWithJSON:@"Fake JSON"];
-//    XCTAssertEqualObjects([delegate receivedTopStories], [NSArray array],@"Returning an empty array is not an error");
-//}
-//
-//- (void)testDelegateNotifiedOfErrorWhenItemBuilderFailsToMakeATopStoryArray {
-//    builder.arrayToReturn = nil;
-//    builder.errorToSet = underlyingError;
-//    [manager recievedTopStoriesWithJSON:@"Fake JSON"];
-//    XCTAssertNotNil([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey],@"The delegate should have found out about the error");
-//}
-//
-//- (void)testDelegateRecievesTopStoriesDiscoveredByManager {
-//    builder.arrayToReturn = returnedTopStories;
-//    builder.errorToSet = underlyingError;
-//    [manager recievedTopStoriesWithJSON:@"Fake JSON"];
-//    XCTAssertEqualObjects([delegate receivedTopStories], returnedTopStories, @"The manager should have sent its top stories to the delegate");
-//}
+- (void)testItemArrayIsPassedToBuilder {
+    [manager recievedTopStoriesWithJSON:@"Fake JSON"];
+    XCTAssertEqualObjects(builder.JSONArray, @[@"Fake JSON"], @"Array of items needs to be passed to the builder");
+}
+
+- (void)testEmptyArrayIsPassedToDelegate {
+    builder.arrayToReturn = [NSArray array];
+    [manager recievedTopStoriesWithJSON:@"Fake JSON"];
+    XCTAssertEqualObjects([delegate receivedTopStories], [NSArray array],@"Returning an empty array is not an error");
+}
+
+- (void)testDelegateNotifiedOfErrorWhenItemBuilderFailsToMakeATopStoryArray {
+    builder.arrayToReturn = nil;
+    builder.errorToSet = underlyingError;
+    [manager recievedTopStoriesWithJSON:@"Fake JSON"];
+    XCTAssertNotNil([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey],@"The delegate should have found out about the error");
+}
+
+- (void)testDelegateRecievesTopStoriesDiscoveredByManager {
+    builder.arrayToReturn = returnedTopStories;
+    builder.errorToSet = underlyingError;
+    [manager recievedTopStoriesWithJSON:@"Fake JSON"];
+    XCTAssertEqualObjects([delegate receivedTopStories], returnedTopStories, @"The manager should have sent its top stories to the delegate");
+}
 
 
 @end

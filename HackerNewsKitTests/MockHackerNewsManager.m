@@ -109,4 +109,5 @@
     fetchedJobsStoryString = objectNotation;
 }
 
+
 @end
