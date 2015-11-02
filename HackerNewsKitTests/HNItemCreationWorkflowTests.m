@@ -85,6 +85,7 @@
     XCTAssertTrue([communicator wasAskedToFetchItem], @"Asking the communicator for an item from a item ID requires fetching data ");
 }
 
+#pragma mark - Error Testing
 - (void)testErrorReturnedToDelegateIsNotErrorNotifiedByCommunicator {
     [manager communicatorTopStoriesFetchFailedWithError:underlyingError];
     XCTAssertFalse(underlyingError == [delegate fetchError],@"Error should be at the correct level of abstraction.");
@@ -99,6 +100,27 @@
     [manager communicatorItemFetchFailedWithError:underlyingError];
     XCTAssertEqualObjects([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey],underlyingError, @"The underlying error should be available to client code when fetching an item fails");
 }
+
+- (void)testErrorReturnedToDelegateByNewStoryFetchDocumentsUnderlyingError {
+    [manager communicatorNewStoriesFetchFailedWithError:underlyingError];
+    XCTAssertEqualObjects([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey],underlyingError, @"The underlying error should be available to client code when fetching new stories fails");
+}
+
+- (void)testErrorReturnedToDelegateByAskStoryFetchDocumentsUnderlyingError {
+    [manager communicatorAskStoriesFetchFailedWithError:underlyingError];
+    XCTAssertEqualObjects([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey],underlyingError, @"The underlying error should be available to client code when fetching ask stories fails");
+}
+
+- (void)testErrorReturnedToDelegateByShowStoryFetchDocumentsUnderlyingError {
+    [manager communicatorShowStoriesFetchFailedWithError:underlyingError];
+    XCTAssertEqualObjects([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey],underlyingError, @"The underlying error should be available to client code when fetching show stories fails");
+}
+
+- (void)testErrorReturnedToDelegateByJobStoryFetchDocumentsUnderlyingError {
+    [manager communicatorJobStoriesFetchFailedWithError:underlyingError];
+    XCTAssertEqualObjects([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey],underlyingError, @"The underlying error should be available to client code when fetching job stories fails");
+}
+
 #pragma mark - Item
 - (void)testItemJSONIsPassedToItemBuilder {
     [manager recievedItemWithJSON:@"Fake JSON"];
@@ -123,32 +145,5 @@
     [manager recievedItemWithJSON:@"Fake JSON"];
     XCTAssertEqualObjects([delegate receivedItem], returnedItem, @"The manager should have sent it's questions to the delegate");
 }
-
-#pragma mark - Top stories
-- (void)testItemArrayIsPassedToBuilder {
-    [manager recievedTopStoriesWithJSON:@"Fake JSON"];
-    XCTAssertEqualObjects(builder.JSONArray, @[@"Fake JSON"], @"Array of items needs to be passed to the builder");
-}
-
-- (void)testEmptyArrayIsPassedToDelegate {
-    builder.arrayToReturn = [NSArray array];
-    [manager recievedTopStoriesWithJSON:@"Fake JSON"];
-    XCTAssertEqualObjects([delegate receivedTopStories], [NSArray array],@"Returning an empty array is not an error");
-}
-
-- (void)testDelegateNotifiedOfErrorWhenItemBuilderFailsToMakeATopStoryArray {
-    builder.arrayToReturn = nil;
-    builder.errorToSet = underlyingError;
-    [manager recievedTopStoriesWithJSON:@"Fake JSON"];
-    XCTAssertNotNil([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey],@"The delegate should have found out about the error");
-}
-
-- (void)testDelegateRecievesTopStoriesDiscoveredByManager {
-    builder.arrayToReturn = returnedTopStories;
-    builder.errorToSet = underlyingError;
-    [manager recievedTopStoriesWithJSON:@"Fake JSON"];
-    XCTAssertEqualObjects([delegate receivedTopStories], returnedTopStories, @"The manager should have sent its top stories to the delegate");
-}
-
 
 @end

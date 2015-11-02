@@ -21,20 +21,39 @@
 
     self.manager = [[HackerNewsManager alloc] init];
     self.manager.delegate = self;
-    [self.manager fetchTopStories];
+    [self.manager fetchShowStories];
 }
 
+#pragma mark - HackerNewsManager Delegate
 - (void)didReceiveItem:(HNItem *)item {
     NSLog(@"%@",item.title);
 }
 
 - (void)didReceiveTopStories:(NSArray *)topStories {
-    NSLog(@"%@",topStories);
+    HNItem *item = [topStories objectAtIndex:0];
+    NSLog(@"%@",item.title);
 }
 
-- (void)hackerNewsItemFetchFailedWithError:(NSError *)error {
+- (void)didReceiveAskStories:(NSArray *)askStories {
+    HNItem *item = [askStories objectAtIndex:0];
+    NSLog(@"%@",item.title);
+}
+- (void)didReceiveJobStories:(NSArray *)jobStories {
+    HNItem *item = [jobStories objectAtIndex:0];
+    NSLog(@"%@",item.title);
 }
 
-- (void)hackerNewsTopStoriesFetchFailedWithError:(NSError *)error {
+- (void)didReceiveNewStories:(NSArray *)newStories {
+    HNItem *item = [newStories objectAtIndex:0];
+    NSLog(@"%@",item.title);
 }
+
+- (void)didReceiveShowStories:(NSArray *)showStories {
+    HNItem *item = [showStories objectAtIndex:0];
+    NSLog(@"%@",item.title);
+}
+
+- (void)hackerNewsFetchFailedWithError:(NSError *)error {
+}
+
 @end

@@ -9,14 +9,13 @@
 #import "MockHackerNewsManagerDelegate.h"
 
 @implementation MockHackerNewsManagerDelegate
-- (void)hackerNewsTopStoriesFetchFailedWithError:(NSError *)error {
+
+#pragma mark - Error
+- (void)hackerNewsFetchFailedWithError:(NSError *)error {
     self.fetchError = error;
 }
 
-- (void)hackerNewsItemFetchFailedWithError:(NSError *)error {
-    self.fetchError = error;
-}
-
+#pragma mark - Success
 - (void)didReceiveTopStories:(NSArray *)topStories {
     self.receivedTopStories = topStories;
 }
