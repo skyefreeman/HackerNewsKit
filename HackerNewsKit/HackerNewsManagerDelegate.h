@@ -10,12 +10,16 @@
 @class HNItem;
 
 @protocol HackerNewsManagerDelegate <NSObject>
+
+@required
 - (void)hackerNewsFetchFailedWithError:(NSError*)error;
 
+@optional
 - (void)didReceiveTopStories:(NSArray*)topStories;
 - (void)didReceiveNewStories:(NSArray*)newStories;
 - (void)didReceiveAskStories:(NSArray*)askStories;
 - (void)didReceiveShowStories:(NSArray*)showStories;
 - (void)didReceiveJobStories:(NSArray*)jobStories;
 - (void)didReceiveItem:(HNItem*)item;
+
 @end

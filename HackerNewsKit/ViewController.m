@@ -14,29 +14,36 @@
 @property (nonatomic) HackerNewsManager *manager;
 @end
 
-@implementation ViewController
+@implementation ViewController {
+    BOOL didFetch;
+    BOOL didFetchAgain;
+    NSMutableArray *cachedTopStories;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    cachedTopStories = [[NSMutableArray alloc] init];
+    
     self.manager = [[HackerNewsManager alloc] init];
     self.manager.delegate = self;
-    [self.manager fetchShowStories];
+    
+    [self.manager fetchTopStories];
+//    [self.manager fetchMore];
 }
 
 #pragma mark - HackerNewsManager Delegate
 - (void)didReceiveItem:(HNItem *)item {
-    NSLog(@"%@",item.title);
+
 }
 
 - (void)didReceiveTopStories:(NSArray *)topStories {
-    HNItem *item = [topStories objectAtIndex:0];
-    NSLog(@"%@",item.title);
+    [cachedTopStories addObjectsFromArray:topStories];
+    NSLog(@"%lu",cachedTopStories.count);
 }
 
 - (void)didReceiveAskStories:(NSArray *)askStories {
-    HNItem *item = [askStories objectAtIndex:0];
-    NSLog(@"%@",item.title);
+    NSLog(@"%lu",askStories.count);
 }
 - (void)didReceiveJobStories:(NSArray *)jobStories {
     HNItem *item = [jobStories objectAtIndex:0];
@@ -54,6 +61,7 @@
 }
 
 - (void)hackerNewsFetchFailedWithError:(NSError *)error {
+    NSLog(@"%@",error);
 }
 
 @end

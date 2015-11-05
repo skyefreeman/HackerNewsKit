@@ -24,6 +24,8 @@
 - (void)fetchAskStories;
 - (void)fetchShowStories;
 - (void)fetchJobStories;
+
+- (void)fetchMore;
 - (void)fetchItemForIdentifier:(NSInteger)identifier;
 
 @end
@@ -32,5 +34,6 @@ extern NSString *HackerNewsManagerError;
 
 typedef NS_ENUM(NSInteger, HackerNewsManagerErrorCode) {
     HackerNewsManagerErrorCodeFetch,
+    HackerNewsManagerErrorCodePagination,
 };
 

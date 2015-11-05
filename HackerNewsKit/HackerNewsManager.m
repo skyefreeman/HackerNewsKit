@@ -15,15 +15,34 @@
 NSString *HackerNewsManagerError = @"HackerNewsManagerError";
 NSInteger const kMaxFetchCount = 30;
 
+typedef NS_ENUM(NSInteger, ItemFetchType) {
+    ItemFetchTypeTopStories,
+    ItemFetchTypeNewStories,
+    ItemFetchTypeAskStories,
+    ItemFetchTypeShowStories,
+    ItemFetchTypeJobStories,
+};
+
 @interface HackerNewsManager ()
 
-- (void)getItems:(NSString*)items withSuccess:(void (^)(NSArray *itemObjects))completion;
+// Cached Properties
+@property (nonatomic, copy) NSString *cachedItemJSON;
+@property (nonatomic) ItemFetchType cachedItemFetchType;
+@property (nonatomic) NSInteger fetchStartIndex;
 
-- (NSArray*)arrayFromJSON:(NSString*)objectNotation;
+// Fetching Queued Items
+- (void)getItemsForItemIdentifiers:(NSArray*)itemIDs withSuccess:(void (^)(NSArray *))completion;
+- (void)getItemsForJSON:(NSString*)itemJSON withSuccess:(void (^)(NSArray *itemObjects))completion;
 
+// Error Reporting
 - (void)tellDelegateAboutFetchError:(NSError*)error;
+- (void)tellDelegateAboutCacheError;
+
 - (NSError*)reportableErrorFromError:(NSError*)error domain:(NSString*)errorDomain code:(NSInteger)errorCode;
 - (NSDictionary*)errorInfoFromError:(NSError*)error;
+
+// Convenience
+- (NSArray*)arrayFromJSON:(NSString*)objectNotation;
 
 @end
 
@@ -54,23 +73,65 @@ NSInteger const kMaxFetchCount = 30;
 }
 
 - (void)fetchTopStories {
+    self.cachedItemFetchType = ItemFetchTypeTopStories;
     [self.communicator fetchTopStories];
 }
 
 - (void)fetchNewStories {
+    self.cachedItemFetchType = ItemFetchTypeNewStories;
     [self.communicator fetchNewStories];
 }
 
 - (void)fetchAskStories {
+    self.cachedItemFetchType = ItemFetchTypeAskStories;
     [self.communicator fetchAskStories];
 }
 
 - (void)fetchShowStories {
+    self.cachedItemFetchType = ItemFetchTypeShowStories;
     [self.communicator fetchShowStories];
 }
 
 - (void)fetchJobStories {
+    self.cachedItemFetchType = ItemFetchTypeJobStories;
     [self.communicator fetchJobStories];
+}
+
+- (void)fetchMore {
+    if (self.cachedItemJSON == nil) {
+        [self tellDelegateAboutCacheError];
+        return;
+    }
+    
+    self.fetchStartIndex += kMaxFetchCount;
+    
+    switch (self.cachedItemFetchType) {
+        case ItemFetchTypeTopStories: {
+            [self recievedTopStoriesWithJSON:self.cachedItemJSON];
+            break;
+        }
+        case ItemFetchTypeNewStories: {
+            [self recievedNewStoriesWithJSON:self.cachedItemJSON];
+            break;
+        }
+        case ItemFetchTypeAskStories: {
+            [self recievedAskStoriesWithJSON:self.cachedItemJSON];
+            break;
+        }
+        case ItemFetchTypeShowStories: {
+            [self recievedShowStoriesWithJSON:self.cachedItemJSON];
+            break;
+        }
+        case ItemFetchTypeJobStories: {
+            [self recievedJobsStoriesWithJSON:self.cachedItemJSON];
+            break;
+        }
+    }
+}
+
+#pragma mark - Setter Override
+- (void)setCachedItemFetchType:(ItemFetchType)cachedItemFetchType {
+    self.fetchStartIndex = 0;
 }
 
 #pragma mark - HackerNewsCommunicator Delegate
@@ -109,57 +170,66 @@ NSInteger const kMaxFetchCount = 30;
 }
 
 - (void)recievedTopStoriesWithJSON:(NSString *)objectNotation {
-    [self getItems:objectNotation withSuccess:^(NSArray *itemObjects) {
+    [self getItemsForJSON:objectNotation withSuccess:^(NSArray *itemObjects) {
         [self.delegate didReceiveTopStories:itemObjects];
     }];
 }
 
 - (void)recievedNewStoriesWithJSON:(NSString *)objectNotation {
-    [self getItems:objectNotation withSuccess:^(NSArray *itemObjects) {
+    [self getItemsForJSON:objectNotation withSuccess:^(NSArray *itemObjects) {
         [self.delegate didReceiveNewStories:itemObjects];
     }];
 }
 
 - (void)recievedAskStoriesWithJSON:(NSString *)objectNotation {
-    [self getItems:objectNotation withSuccess:^(NSArray *itemObjects) {
+    [self getItemsForJSON:objectNotation withSuccess:^(NSArray *itemObjects) {
         [self.delegate didReceiveAskStories:itemObjects];
     }];
 }
 
 - (void)recievedShowStoriesWithJSON:(NSString *)objectNotation {
-    [self getItems:objectNotation withSuccess:^(NSArray *itemObjects) {
+    [self getItemsForJSON:objectNotation withSuccess:^(NSArray *itemObjects) {
         [self.delegate didReceiveShowStories:itemObjects];
     }];
 }
 
 - (void)recievedJobsStoriesWithJSON:(NSString *)objectNotation {
-    [self getItems:objectNotation withSuccess:^(NSArray *itemObjects) {
+    [self getItemsForJSON:objectNotation withSuccess:^(NSArray *itemObjects) {
         [self.delegate didReceiveJobStories:itemObjects];
     }];
 }
 
 #pragma mark - Item Fetch + Building
-- (void)getItems:(NSString*)items withSuccess:(void (^)(NSArray *itemObjects))completion {
-    NSArray *itemIdentifiers = [self arrayFromJSON:items];
-    NSInteger fetchCount = (itemIdentifiers.count > kMaxFetchCount) ? kMaxFetchCount : itemIdentifiers.count;
-    [self performItemRequestsWithItemIdentifiers:itemIdentifiers withCount:fetchCount withCompletion:^(NSArray *itemObjects) {
+- (void)getItemsForJSON:(NSString*)itemJSON withSuccess:(void (^)(NSArray *itemObjects))successHandler {
+    self.cachedItemJSON = itemJSON;
+    NSArray *itemIdentifiers = [self arrayFromJSON:itemJSON];
+    [self getItemsForItemIdentifiers:itemIdentifiers withSuccess:successHandler];
+}
+
+- (void)getItemsForItemIdentifiers:(NSArray*)itemIDs withSuccess:(void (^)(NSArray *))successHandler {
+    NSInteger remainingItemIDs = itemIDs.count - _fetchStartIndex;
+    NSInteger fetchableItemCount = (remainingItemIDs > 0) ? remainingItemIDs : 0;
+    NSInteger fetchCount = (remainingItemIDs > kMaxFetchCount) ? kMaxFetchCount : fetchableItemCount;
+    
+    [self performItemRequestsWithItemIdentifiers:itemIDs withCount:fetchCount startIndex:_fetchStartIndex withCompletion:^(NSArray *itemObjects) {
         NSError *error = nil;
         NSArray *builtItems = [_itemBuilder itemsFromJSONArray:itemObjects error:&error];
         if (!builtItems) {
             [self tellDelegateAboutFetchError:error];
         } else {
-            if (completion) completion(builtItems);
+            if (successHandler) successHandler(builtItems);
         }
     }];
 }
 
 - (void)performItemRequestsWithItemIdentifiers:(NSArray *)itemIDs
                                      withCount:(NSInteger)itemCount
+                                    startIndex:(NSInteger)startIndex
                                 withCompletion:(void (^)(NSArray *itemObjects))completion
 {
     NSMutableArray *itemObjects = [NSMutableArray array];
     dispatch_group_t group = dispatch_group_create();
-    for (int i = 0; i < itemCount; i++) {
+    for (NSInteger i = startIndex; i < (startIndex + itemCount); i++) {
         
         dispatch_group_enter(group);
         NSString *IDString = itemIDs[i];
@@ -182,6 +252,12 @@ NSInteger const kMaxFetchCount = 30;
     NSError *reportableError = [self reportableErrorFromError:error domain:HackerNewsManagerError code:HackerNewsManagerErrorCodeFetch];
     [self.delegate hackerNewsFetchFailedWithError:reportableError];
 }
+
+- (void)tellDelegateAboutCacheError {
+    NSError *error = [NSError errorWithDomain:HackerNewsManagerError code:HackerNewsManagerErrorCodePagination userInfo:nil];
+    [self.delegate hackerNewsFetchFailedWithError:error];
+}
+
 - (NSError*)reportableErrorFromError:(NSError*)error domain:(NSString*)errorDomain code:(NSInteger)errorCode {
     NSDictionary *errorInfo = [self errorInfoFromError:error];
     return [NSError errorWithDomain:errorDomain code:errorCode userInfo:errorInfo];
