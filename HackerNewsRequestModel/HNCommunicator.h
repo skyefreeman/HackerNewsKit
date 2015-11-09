@@ -16,7 +16,6 @@
     NSURLSessionDataTask *fetchingTask;
     NSMutableData *receivedData;
 @private
-    id <HNCommunicatorDelegate> __weak delegate;
     void (^errorHandler)(NSError *);
     void (^successHandler)(NSString *);
 }

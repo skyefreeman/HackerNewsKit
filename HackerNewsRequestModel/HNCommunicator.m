@@ -132,7 +132,7 @@ static NSString *jobStoryURLString = @"https://hacker-news.firebaseio.com/v0/job
 }
 
 - (NSURL*)itemURLWithIdentifier:(NSInteger)itemID {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"%@%lu.json",baseItemURLString,itemID]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@%lu.json",baseItemURLString,(long)itemID]];
 }
 
 @end
