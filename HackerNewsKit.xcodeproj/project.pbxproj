@@ -85,7 +85,7 @@
 		EED39B6D1BF132650032B543 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../Example/main.m; sourceTree = "<group>"; };
 		EED39B6E1BF132650032B543 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		EED39B6F1BF132650032B543 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		EED39B771BF1329B0032B543 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		EED39B771BF1329B0032B543 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Example/Default-568h@2x.png"; sourceTree = "<group>"; };
 		EED39B791BF133B50032B543 /* HackerNewsKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HackerNewsKit.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,9 +110,10 @@
 		EE26437C1BC32562002C4F8A = {
 			isa = PBXGroup;
 			children = (
-				EED39B631BF1317C0032B543 /* Example */,
-				EE2643871BC32562002C4F8A /* HackerNewsKit */,
+				EED39B791BF133B50032B543 /* HackerNewsKit.h */,
+				EE2643871BC32562002C4F8A /* HackerNewsRequestModel */,
 				EE2643A11BC32562002C4F8A /* HackerNewsKitTests */,
+				EED39B631BF1317C0032B543 /* Example */,
 				EED39B621BF12AB50032B543 /* Pod Metadata */,
 				EE2643861BC32562002C4F8A /* Products */,
 			);
@@ -127,10 +128,9 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EE2643871BC32562002C4F8A /* HackerNewsKit */ = {
+		EE2643871BC32562002C4F8A /* HackerNewsRequestModel */ = {
 			isa = PBXGroup;
 			children = (
-				EED39B791BF133B50032B543 /* HackerNewsKit.h */,
 				EE2643B01BC3285F002C4F8A /* HNItem.h */,
 				EE2643B11BC3285F002C4F8A /* HNItem.m */,
 				EED00BFF1BC801F8004C3151 /* HNItemBuilder.h */,
@@ -142,7 +142,7 @@
 				EED00BF31BC5BE0F004C3151 /* HNCommunicator.m */,
 				EED00C1B1BCC5CE9004C3151 /* HNCommunicatorDelegate.h */,
 			);
-			path = HackerNewsKit;
+			path = HackerNewsRequestModel;
 			sourceTree = "<group>";
 		};
 		EE2643881BC32562002C4F8A /* Supporting Files */ = {
