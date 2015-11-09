@@ -20,7 +20,7 @@ s.author             = { "Skye Freeman" => "skyefreeman@icloud.com" }
 s.social_media_url   = "http://twitter.com/ImSkyeFreeman"
 s.platform     = :ios
 s.source       = { :git => "https://github.com/skyefreeman/HackerNewsKit.git", :tag => "master" }
-s.source_files  = "*.h" "HackerNewsKit/HackerNewsRequestModel/*.{h,m}"
+s.source_files  = "*.{h,m}"
 s.public_header_files = "*.h"
 s.requires_arc = true
 end
