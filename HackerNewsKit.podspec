@@ -19,7 +19,7 @@ s.license      = { :type => "MIT", :file => "LICENSE" }
 s.author             = { "Skye Freeman" => "skyefreeman@icloud.com" }
 s.social_media_url   = "http://twitter.com/ImSkyeFreeman"
 s.platform     = :ios
-s.source       = { :git => "https://github.com/skyefreeman/HackerNewsKit.git", :tag => "master" }
+s.source       = { :git => "https://github.com/skyefreeman/HackerNewsKit.git", :tag => "1.0" }
 s.source_files  = "HackerNewsRequestModel/*.{h,m}", "HackerNewsKit.h"
 s.public_header_files = "*.h"
 s.requires_arc = true
