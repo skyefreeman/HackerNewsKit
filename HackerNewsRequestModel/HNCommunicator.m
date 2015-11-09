@@ -23,53 +23,51 @@ static NSString *jobStoryURLString = @"https://hacker-news.firebaseio.com/v0/job
 
 @implementation HNCommunicator
 
-@synthesize delegate;
-
 - (void)fetchTopStories {
     [self fetchContentAtURL:[NSURL URLWithString:topStoryURLString] errorHandler:^(NSError *error) {
-        [delegate communicatorTopStoriesFetchFailedWithError:error];
+        if (_delegate) [_delegate communicatorTopStoriesFetchFailedWithError:error];
     } successHandler:^(NSString *objectNotation) {
-        [delegate recievedTopStoriesWithJSON:objectNotation];
+        if (_delegate) [_delegate recievedTopStoriesWithJSON:objectNotation];
     }];
 }
 
 - (void)fetchNewStories {
     [self fetchContentAtURL:[NSURL URLWithString:newStoryURLString] errorHandler:^(NSError *error) {
-        [delegate communicatorNewStoriesFetchFailedWithError:error];
+        if (_delegate) [_delegate communicatorNewStoriesFetchFailedWithError:error];
     } successHandler:^(NSString *objectNotation) {
-        [delegate recievedNewStoriesWithJSON:objectNotation];
+        if (_delegate) [_delegate recievedNewStoriesWithJSON:objectNotation];
     }];
 }
 
 - (void)fetchAskStories {
     [self fetchContentAtURL:[NSURL URLWithString:askStoryURLString] errorHandler:^(NSError *error) {
-        [delegate communicatorAskStoriesFetchFailedWithError:error];
+        if (_delegate) [_delegate communicatorAskStoriesFetchFailedWithError:error];
     } successHandler:^(NSString *objectNotation) {
-        [delegate recievedAskStoriesWithJSON:objectNotation];
+        if (_delegate) [_delegate recievedAskStoriesWithJSON:objectNotation];
     }];
 }
 
 - (void)fetchShowStories {
     [self fetchContentAtURL:[NSURL URLWithString:showStoryURLString] errorHandler:^(NSError *error) {
-        [delegate communicatorShowStoriesFetchFailedWithError:error];
+        if (_delegate) [_delegate communicatorShowStoriesFetchFailedWithError:error];
     } successHandler:^(NSString *objectNotation) {
-        [delegate recievedShowStoriesWithJSON:objectNotation];
+        if (_delegate) [_delegate recievedShowStoriesWithJSON:objectNotation];
     }];
 }
 
 - (void)fetchJobStories {
     [self fetchContentAtURL:[NSURL URLWithString:jobStoryURLString] errorHandler:^(NSError *error) {
-        [delegate communicatorJobStoriesFetchFailedWithError:error];
+        if (_delegate) [_delegate communicatorJobStoriesFetchFailedWithError:error];
     } successHandler:^(NSString *objectNotation) {
-        [delegate recievedJobsStoriesWithJSON:objectNotation];
+        if (_delegate) [_delegate recievedJobsStoriesWithJSON:objectNotation];
     }];
 }
 
 - (void)fetchItemForIdentifier:(NSInteger)identifier {
     [self fetchContentAtURL:[self itemURLWithIdentifier:identifier] errorHandler:^(NSError *error) {
-        [delegate communicatorItemFetchFailedWithError:error];
+        if (_delegate) [_delegate communicatorItemFetchFailedWithError:error];
     } successHandler:^(NSString *objectNotation) {
-        [delegate recievedItemWithJSON:objectNotation];
+        if (_delegate) [_delegate recievedItemWithJSON:objectNotation];
     }];
 }
 
