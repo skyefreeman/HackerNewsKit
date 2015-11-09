@@ -7,28 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EE26438A1BC32562002C4F8A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2643891BC32562002C4F8A /* main.m */; };
-		EE26438D1BC32562002C4F8A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE26438C1BC32562002C4F8A /* AppDelegate.m */; };
-		EE2643901BC32562002C4F8A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE26438F1BC32562002C4F8A /* ViewController.m */; };
-		EE2643931BC32562002C4F8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2643911BC32562002C4F8A /* Main.storyboard */; };
-		EE2643951BC32562002C4F8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE2643941BC32562002C4F8A /* Assets.xcassets */; };
-		EE2643981BC32562002C4F8A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2643961BC32562002C4F8A /* LaunchScreen.storyboard */; };
-		EE2643AF1BC32824002C4F8A /* HNItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2643AE1BC32824002C4F8A /* HNItemTests.m */; settings = {ASSET_TAGS = (); }; };
-		EE2643B21BC3285F002C4F8A /* HNItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2643B11BC3285F002C4F8A /* HNItem.m */; settings = {ASSET_TAGS = (); }; };
-		EE3A12011BD893A900F56E1B /* HackerNewsManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3A12001BD893A900F56E1B /* HackerNewsManagerTests.m */; settings = {ASSET_TAGS = (); }; };
-		EED00BE61BC5B153004C3151 /* HNItemCreationWorkflowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00BE51BC5B153004C3151 /* HNItemCreationWorkflowTests.m */; settings = {ASSET_TAGS = (); }; };
-		EED00BE91BC5B225004C3151 /* HackerNewsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00BE81BC5B225004C3151 /* HackerNewsManager.m */; settings = {ASSET_TAGS = (); }; };
-		EED00BF11BC5B8DE004C3151 /* MockHackerNewsManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00BF01BC5B8DE004C3151 /* MockHackerNewsManagerDelegate.m */; settings = {ASSET_TAGS = (); }; };
-		EED00BF41BC5BE0F004C3151 /* HackerNewsCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00BF31BC5BE0F004C3151 /* HackerNewsCommunicator.m */; settings = {ASSET_TAGS = (); }; };
-		EED00BF71BC5BE3A004C3151 /* MockHackerNewsCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00BF61BC5BE3A004C3151 /* MockHackerNewsCommunicator.m */; settings = {ASSET_TAGS = (); }; };
-		EED00C011BC801F8004C3151 /* HNItemBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C001BC801F8004C3151 /* HNItemBuilder.m */; settings = {ASSET_TAGS = (); }; };
-		EED00C041BC80211004C3151 /* FakeHNItemBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C031BC80211004C3151 /* FakeHNItemBuilder.m */; settings = {ASSET_TAGS = (); }; };
-		EED00C061BC82FE9004C3151 /* HNItemBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C051BC82FE9004C3151 /* HNItemBuilderTests.m */; settings = {ASSET_TAGS = (); }; };
-		EED00C0A1BC9B17A004C3151 /* HackerNewsCommunicatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C091BC9B17A004C3151 /* HackerNewsCommunicatorTests.m */; settings = {ASSET_TAGS = (); }; };
-		EED00C0D1BC9B505004C3151 /* InspectableHackerNewsCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C0C1BC9B505004C3151 /* InspectableHackerNewsCommunicator.m */; settings = {ASSET_TAGS = (); }; };
-		EED00C141BCC54A0004C3151 /* NonNetworkedHackerNewsCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C131BCC54A0004C3151 /* NonNetworkedHackerNewsCommunicator.m */; settings = {ASSET_TAGS = (); }; };
-		EED00C171BCC5A09004C3151 /* MockHackerNewsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C161BCC5A09004C3151 /* MockHackerNewsManager.m */; settings = {ASSET_TAGS = (); }; };
-		EED00C1A1BCC5A3D004C3151 /* FakeURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C191BCC5A3D004C3151 /* FakeURLResponse.m */; settings = {ASSET_TAGS = (); }; };
+		EE2643AF1BC32824002C4F8A /* HNItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2643AE1BC32824002C4F8A /* HNItemTests.m */; };
+		EE2643B21BC3285F002C4F8A /* HNItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2643B11BC3285F002C4F8A /* HNItem.m */; };
+		EE3A12011BD893A900F56E1B /* HackerNewsManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3A12001BD893A900F56E1B /* HackerNewsManagerTests.m */; };
+		EED00BE61BC5B153004C3151 /* HNItemCreationWorkflowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00BE51BC5B153004C3151 /* HNItemCreationWorkflowTests.m */; };
+		EED00BE91BC5B225004C3151 /* HNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00BE81BC5B225004C3151 /* HNManager.m */; };
+		EED00BF11BC5B8DE004C3151 /* MockHackerNewsManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00BF01BC5B8DE004C3151 /* MockHackerNewsManagerDelegate.m */; };
+		EED00BF41BC5BE0F004C3151 /* HNCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00BF31BC5BE0F004C3151 /* HNCommunicator.m */; };
+		EED00BF71BC5BE3A004C3151 /* MockHackerNewsCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00BF61BC5BE3A004C3151 /* MockHackerNewsCommunicator.m */; };
+		EED00C011BC801F8004C3151 /* HNItemBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C001BC801F8004C3151 /* HNItemBuilder.m */; };
+		EED00C041BC80211004C3151 /* FakeHNItemBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C031BC80211004C3151 /* FakeHNItemBuilder.m */; };
+		EED00C061BC82FE9004C3151 /* HNItemBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C051BC82FE9004C3151 /* HNItemBuilderTests.m */; };
+		EED00C0A1BC9B17A004C3151 /* HackerNewsCommunicatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C091BC9B17A004C3151 /* HackerNewsCommunicatorTests.m */; };
+		EED00C0D1BC9B505004C3151 /* InspectableHackerNewsCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C0C1BC9B505004C3151 /* InspectableHackerNewsCommunicator.m */; };
+		EED00C141BCC54A0004C3151 /* NonNetworkedHackerNewsCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C131BCC54A0004C3151 /* NonNetworkedHackerNewsCommunicator.m */; };
+		EED00C171BCC5A09004C3151 /* MockHackerNewsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C161BCC5A09004C3151 /* MockHackerNewsManager.m */; };
+		EED00C1A1BCC5A3D004C3151 /* FakeURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00C191BCC5A3D004C3151 /* FakeURLResponse.m */; };
+		EED39B701BF132650032B543 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EED39B651BF132650032B543 /* AppDelegate.m */; };
+		EED39B711BF132650032B543 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EED39B661BF132650032B543 /* Assets.xcassets */; };
+		EED39B721BF132650032B543 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EED39B681BF132650032B543 /* LaunchScreen.storyboard */; };
+		EED39B731BF132650032B543 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EED39B6A1BF132650032B543 /* Main.storyboard */; };
+		EED39B751BF132650032B543 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EED39B6D1BF132650032B543 /* main.m */; };
+		EED39B761BF132650032B543 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EED39B6F1BF132650032B543 /* ViewController.m */; };
+		EED39B781BF1329B0032B543 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EED39B771BF1329B0032B543 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,15 +44,6 @@
 
 /* Begin PBXFileReference section */
 		EE2643851BC32562002C4F8A /* HackerNewsKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackerNewsKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EE2643891BC32562002C4F8A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		EE26438B1BC32562002C4F8A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		EE26438C1BC32562002C4F8A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		EE26438E1BC32562002C4F8A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		EE26438F1BC32562002C4F8A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		EE2643921BC32562002C4F8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		EE2643941BC32562002C4F8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EE2643971BC32562002C4F8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		EE2643991BC32562002C4F8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE26439E1BC32562002C4F8A /* HackerNewsKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HackerNewsKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE2643A41BC32562002C4F8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE2643AE1BC32824002C4F8A /* HNItemTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNItemTests.m; sourceTree = "<group>"; };
@@ -59,13 +51,13 @@
 		EE2643B11BC3285F002C4F8A /* HNItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNItem.m; sourceTree = "<group>"; };
 		EE3A12001BD893A900F56E1B /* HackerNewsManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HackerNewsManagerTests.m; sourceTree = "<group>"; };
 		EED00BE51BC5B153004C3151 /* HNItemCreationWorkflowTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNItemCreationWorkflowTests.m; sourceTree = "<group>"; };
-		EED00BE71BC5B225004C3151 /* HackerNewsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HackerNewsManager.h; sourceTree = "<group>"; };
-		EED00BE81BC5B225004C3151 /* HackerNewsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HackerNewsManager.m; sourceTree = "<group>"; };
-		EED00BEA1BC5B628004C3151 /* HackerNewsManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HackerNewsManagerDelegate.h; sourceTree = "<group>"; };
+		EED00BE71BC5B225004C3151 /* HNManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNManager.h; sourceTree = "<group>"; };
+		EED00BE81BC5B225004C3151 /* HNManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNManager.m; sourceTree = "<group>"; };
+		EED00BEA1BC5B628004C3151 /* HNManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNManagerDelegate.h; sourceTree = "<group>"; };
 		EED00BEF1BC5B8DE004C3151 /* MockHackerNewsManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockHackerNewsManagerDelegate.h; sourceTree = "<group>"; };
 		EED00BF01BC5B8DE004C3151 /* MockHackerNewsManagerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockHackerNewsManagerDelegate.m; sourceTree = "<group>"; };
-		EED00BF21BC5BE0F004C3151 /* HackerNewsCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HackerNewsCommunicator.h; sourceTree = "<group>"; };
-		EED00BF31BC5BE0F004C3151 /* HackerNewsCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HackerNewsCommunicator.m; sourceTree = "<group>"; };
+		EED00BF21BC5BE0F004C3151 /* HNCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNCommunicator.h; sourceTree = "<group>"; };
+		EED00BF31BC5BE0F004C3151 /* HNCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNCommunicator.m; sourceTree = "<group>"; };
 		EED00BF51BC5BE3A004C3151 /* MockHackerNewsCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockHackerNewsCommunicator.h; sourceTree = "<group>"; };
 		EED00BF61BC5BE3A004C3151 /* MockHackerNewsCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockHackerNewsCommunicator.m; sourceTree = "<group>"; };
 		EED00BFF1BC801F8004C3151 /* HNItemBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNItemBuilder.h; sourceTree = "<group>"; };
@@ -82,7 +74,19 @@
 		EED00C161BCC5A09004C3151 /* MockHackerNewsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockHackerNewsManager.m; sourceTree = "<group>"; };
 		EED00C181BCC5A3D004C3151 /* FakeURLResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeURLResponse.h; sourceTree = "<group>"; };
 		EED00C191BCC5A3D004C3151 /* FakeURLResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeURLResponse.m; sourceTree = "<group>"; };
-		EED00C1B1BCC5CE9004C3151 /* HackerNewsCommunicatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HackerNewsCommunicatorDelegate.h; sourceTree = "<group>"; };
+		EED00C1B1BCC5CE9004C3151 /* HNCommunicatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNCommunicatorDelegate.h; sourceTree = "<group>"; };
+		EED39B611BF12A620032B543 /* HackerNewsKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = HackerNewsKit.podspec; sourceTree = "<group>"; };
+		EED39B641BF132650032B543 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EED39B651BF132650032B543 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EED39B661BF132650032B543 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EED39B691BF132650032B543 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EED39B6B1BF132650032B543 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
+		EED39B6C1BF132650032B543 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Example/Info.plist; sourceTree = "<group>"; };
+		EED39B6D1BF132650032B543 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../Example/main.m; sourceTree = "<group>"; };
+		EED39B6E1BF132650032B543 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		EED39B6F1BF132650032B543 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EED39B771BF1329B0032B543 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		EED39B791BF133B50032B543 /* HackerNewsKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HackerNewsKit.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,8 +110,10 @@
 		EE26437C1BC32562002C4F8A = {
 			isa = PBXGroup;
 			children = (
+				EED39B631BF1317C0032B543 /* Example */,
 				EE2643871BC32562002C4F8A /* HackerNewsKit */,
 				EE2643A11BC32562002C4F8A /* HackerNewsKitTests */,
+				EED39B621BF12AB50032B543 /* Pod Metadata */,
 				EE2643861BC32562002C4F8A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -124,17 +130,17 @@
 		EE2643871BC32562002C4F8A /* HackerNewsKit */ = {
 			isa = PBXGroup;
 			children = (
-				EE2643AD1BC325FB002C4F8A /* Example */,
+				EED39B791BF133B50032B543 /* HackerNewsKit.h */,
 				EE2643B01BC3285F002C4F8A /* HNItem.h */,
 				EE2643B11BC3285F002C4F8A /* HNItem.m */,
 				EED00BFF1BC801F8004C3151 /* HNItemBuilder.h */,
 				EED00C001BC801F8004C3151 /* HNItemBuilder.m */,
-				EED00BE71BC5B225004C3151 /* HackerNewsManager.h */,
-				EED00BE81BC5B225004C3151 /* HackerNewsManager.m */,
-				EED00BEA1BC5B628004C3151 /* HackerNewsManagerDelegate.h */,
-				EED00BF21BC5BE0F004C3151 /* HackerNewsCommunicator.h */,
-				EED00BF31BC5BE0F004C3151 /* HackerNewsCommunicator.m */,
-				EED00C1B1BCC5CE9004C3151 /* HackerNewsCommunicatorDelegate.h */,
+				EED00BE71BC5B225004C3151 /* HNManager.h */,
+				EED00BE81BC5B225004C3151 /* HNManager.m */,
+				EED00BEA1BC5B628004C3151 /* HNManagerDelegate.h */,
+				EED00BF21BC5BE0F004C3151 /* HNCommunicator.h */,
+				EED00BF31BC5BE0F004C3151 /* HNCommunicator.m */,
+				EED00C1B1BCC5CE9004C3151 /* HNCommunicatorDelegate.h */,
 			);
 			path = HackerNewsKit;
 			sourceTree = "<group>";
@@ -142,9 +148,12 @@
 		EE2643881BC32562002C4F8A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				EE2643891BC32562002C4F8A /* main.m */,
+				EED39B771BF1329B0032B543 /* Default-568h@2x.png */,
+				EED39B6C1BF132650032B543 /* Info.plist */,
+				EED39B6D1BF132650032B543 /* main.m */,
 			);
 			name = "Supporting Files";
+			path = ../HackerNewsKit;
 			sourceTree = "<group>";
 		};
 		EE2643A11BC32562002C4F8A /* HackerNewsKitTests */ = {
@@ -155,22 +164,6 @@
 				EE2643A41BC32562002C4F8A /* Info.plist */,
 			);
 			path = HackerNewsKitTests;
-			sourceTree = "<group>";
-		};
-		EE2643AD1BC325FB002C4F8A /* Example */ = {
-			isa = PBXGroup;
-			children = (
-				EE26438B1BC32562002C4F8A /* AppDelegate.h */,
-				EE26438C1BC32562002C4F8A /* AppDelegate.m */,
-				EE26438E1BC32562002C4F8A /* ViewController.h */,
-				EE26438F1BC32562002C4F8A /* ViewController.m */,
-				EE2643911BC32562002C4F8A /* Main.storyboard */,
-				EE2643961BC32562002C4F8A /* LaunchScreen.storyboard */,
-				EE2643991BC32562002C4F8A /* Info.plist */,
-				EE2643941BC32562002C4F8A /* Assets.xcassets */,
-				EE2643881BC32562002C4F8A /* Supporting Files */,
-			);
-			name = Example;
 			sourceTree = "<group>";
 		};
 		EED00BED1BC5B89D004C3151 /* Tests */ = {
@@ -204,6 +197,29 @@
 				EED00C191BCC5A3D004C3151 /* FakeURLResponse.m */,
 			);
 			name = "Mocks + Fakes + Stubs";
+			sourceTree = "<group>";
+		};
+		EED39B621BF12AB50032B543 /* Pod Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				EED39B611BF12A620032B543 /* HackerNewsKit.podspec */,
+			);
+			name = "Pod Metadata";
+			sourceTree = "<group>";
+		};
+		EED39B631BF1317C0032B543 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				EED39B641BF132650032B543 /* AppDelegate.h */,
+				EED39B651BF132650032B543 /* AppDelegate.m */,
+				EED39B6E1BF132650032B543 /* ViewController.h */,
+				EED39B6F1BF132650032B543 /* ViewController.m */,
+				EED39B681BF132650032B543 /* LaunchScreen.storyboard */,
+				EED39B6A1BF132650032B543 /* Main.storyboard */,
+				EED39B661BF132650032B543 /* Assets.xcassets */,
+				EE2643881BC32562002C4F8A /* Supporting Files */,
+			);
+			path = Example;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,9 +302,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE2643981BC32562002C4F8A /* LaunchScreen.storyboard in Resources */,
-				EE2643951BC32562002C4F8A /* Assets.xcassets in Resources */,
-				EE2643931BC32562002C4F8A /* Main.storyboard in Resources */,
+				EED39B731BF132650032B543 /* Main.storyboard in Resources */,
+				EED39B711BF132650032B543 /* Assets.xcassets in Resources */,
+				EED39B781BF1329B0032B543 /* Default-568h@2x.png in Resources */,
+				EED39B721BF132650032B543 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,13 +323,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EED00BE91BC5B225004C3151 /* HackerNewsManager.m in Sources */,
+				EED39B761BF132650032B543 /* ViewController.m in Sources */,
+				EED00BE91BC5B225004C3151 /* HNManager.m in Sources */,
 				EE2643B21BC3285F002C4F8A /* HNItem.m in Sources */,
 				EED00C011BC801F8004C3151 /* HNItemBuilder.m in Sources */,
-				EE2643901BC32562002C4F8A /* ViewController.m in Sources */,
-				EED00BF41BC5BE0F004C3151 /* HackerNewsCommunicator.m in Sources */,
-				EE26438D1BC32562002C4F8A /* AppDelegate.m in Sources */,
-				EE26438A1BC32562002C4F8A /* main.m in Sources */,
+				EED00BF41BC5BE0F004C3151 /* HNCommunicator.m in Sources */,
+				EED39B751BF132650032B543 /* main.m in Sources */,
+				EED39B701BF132650032B543 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,20 +363,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		EE2643911BC32562002C4F8A /* Main.storyboard */ = {
+		EED39B681BF132650032B543 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				EE2643921BC32562002C4F8A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		EE2643961BC32562002C4F8A /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EE2643971BC32562002C4F8A /* Base */,
+				EED39B691BF132650032B543 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = Base.lproj;
+			sourceTree = "<group>";
+		};
+		EED39B6A1BF132650032B543 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EED39B6B1BF132650032B543 /* Base */,
+			);
+			name = Main.storyboard;
+			path = Base.lproj;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -451,7 +470,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = HackerNewsKit/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.skyefreeman.HackerNewsKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -462,7 +481,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = HackerNewsKit/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.skyefreeman.HackerNewsKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";

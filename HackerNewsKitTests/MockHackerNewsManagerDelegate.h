@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HackerNewsManagerDelegate.h"
+#import "HNManagerDelegate.h"
 #import "HNItem.h"
 
-@interface MockHackerNewsManagerDelegate : NSObject <HackerNewsManagerDelegate>
+@interface MockHackerNewsManagerDelegate : NSObject <HNManagerDelegate>
 @property (strong) NSError *fetchError;
 @property (strong) NSArray *receivedTopStories;
 @property (strong) HNItem *receivedItem;

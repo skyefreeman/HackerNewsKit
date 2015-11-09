@@ -7,18 +7,18 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "HackerNewsManager.h"
+#import "HNManager.h"
 
 @interface HackerNewsManagerTests : XCTestCase
 @end
 
 @implementation HackerNewsManagerTests {
-    HackerNewsManager *manager;
+    HNManager *manager;
 }
 
 - (void)setUp {
     [super setUp];
-    manager = [[HackerNewsManager alloc] init];
+    manager = [[HNManager alloc] init];
 }
 
 - (void)tearDown {

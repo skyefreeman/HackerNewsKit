@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import "HackerNewsManager.h"
+#import "HNManager.h"
 #import "MockHackerNewsManagerDelegate.h"
 #import "MockHackerNewsCommunicator.h"
 #import "FakeHNItemBuilder.h"
@@ -19,7 +19,7 @@
 
 @implementation HNItemCreationWorkflowTests
 {
-    HackerNewsManager *manager;
+    HNManager *manager;
     MockHackerNewsManagerDelegate *delegate;
     MockHackerNewsCommunicator *communicator;
     FakeHNItemBuilder *builder;
@@ -33,7 +33,7 @@
 - (void)setUp {
     [super setUp];
     
-    manager = [[HackerNewsManager alloc] init];
+    manager = [[HNManager alloc] init];
 
     delegate = [[MockHackerNewsManagerDelegate alloc] init];
     manager.delegate = delegate;
@@ -64,7 +64,7 @@
 }
 
 - (void)testNonConformingObjectCannotBeDelegate {
-    XCTAssertThrows(manager.delegate = (id <HackerNewsManagerDelegate>)[NSNull null], @"NSNull should not be used as the delegate because it doesnt conform to the delegate protocol.");
+    XCTAssertThrows(manager.delegate = (id <HNManagerDelegate>)[NSNull null], @"NSNull should not be used as the delegate because it doesnt conform to the delegate protocol.");
 }
 
 - (void)testConformingObjectCanBeDelegate {

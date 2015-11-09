@@ -6,9 +6,9 @@
 //  Copyright © 2015 Skye Freeman. All rights reserved.
 //
 
-#import "HackerNewsManager.h"
+#import "HNManager.h"
 
-@interface MockHackerNewsManager : HackerNewsManager {
+@interface MockHackerNewsManager : HNManager {
     NSInteger itemFailureErrorCode;
     NSInteger topStoriesFailureErrorCode;
     NSInteger newStoriesFailureErrorCode;

@@ -14,19 +14,37 @@
 @property (nonatomic) HackerNewsManager *manager;
 @end
 
+<<<<<<< HEAD
 @implementation ViewController
+=======
+@implementation ViewController {
+    BOOL didFetch;
+    BOOL didFetchAgain;
+    NSMutableArray *cachedTopStories;
+}
+>>>>>>> b19d3f52cd42c35de8459fb02093f300601e0ab0
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+<<<<<<< HEAD
+=======
+    cachedTopStories = [[NSMutableArray alloc] init];
+    
+>>>>>>> b19d3f52cd42c35de8459fb02093f300601e0ab0
     self.manager = [[HackerNewsManager alloc] init];
     self.manager.delegate = self;
     
     [self.manager fetchTopStories];
+<<<<<<< HEAD
+=======
+//    [self.manager fetchMore];
+>>>>>>> b19d3f52cd42c35de8459fb02093f300601e0ab0
 }
 
 #pragma mark - HackerNewsManager Delegate
 - (void)didReceiveItem:(HNItem *)item {
+<<<<<<< HEAD
     NSLog(@"%@",item);
 }
 
@@ -48,6 +66,32 @@
 
 - (void)didReceiveShowStories:(NSArray *)showStories {
     NSLog(@"%@",showStories);
+=======
+
+}
+
+- (void)didReceiveTopStories:(NSArray *)topStories {
+    [cachedTopStories addObjectsFromArray:topStories];
+    NSLog(@"%lu",cachedTopStories.count);
+}
+
+- (void)didReceiveAskStories:(NSArray *)askStories {
+    NSLog(@"%lu",askStories.count);
+}
+- (void)didReceiveJobStories:(NSArray *)jobStories {
+    HNItem *item = [jobStories objectAtIndex:0];
+    NSLog(@"%@",item.title);
+}
+
+- (void)didReceiveNewStories:(NSArray *)newStories {
+    HNItem *item = [newStories objectAtIndex:0];
+    NSLog(@"%@",item.title);
+}
+
+- (void)didReceiveShowStories:(NSArray *)showStories {
+    HNItem *item = [showStories objectAtIndex:0];
+    NSLog(@"%@",item.title);
+>>>>>>> b19d3f52cd42c35de8459fb02093f300601e0ab0
 }
 
 - (void)hackerNewsFetchFailedWithError:(NSError *)error {

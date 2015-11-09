@@ -6,9 +6,9 @@
 //  Copyright © 2015 Skye Freeman. All rights reserved.
 //
 
-#import "HackerNewsCommunicator.h"
+#import "HNCommunicator.h"
 
-@interface InspectableHackerNewsCommunicator : HackerNewsCommunicator
+@interface InspectableHackerNewsCommunicator : HNCommunicator
 - (NSURL*)URLToFetch;
 - (NSURLSession*)currentSession;
 - (NSURLSessionDataTask*)currentSessionTask;

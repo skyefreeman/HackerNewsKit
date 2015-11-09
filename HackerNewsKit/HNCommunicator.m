@@ -6,7 +6,7 @@
 //  Copyright © 2015 Skye Freeman. All rights reserved.
 //
 
-#import "HackerNewsCommunicator.h"
+#import "HNCommunicator.h"
 
 static NSString *baseItemURLString = @"https://hacker-news.firebaseio.com/v0/item/";
 static NSString *topStoryURLString = @"https://hacker-news.firebaseio.com/v0/topstories.json";
@@ -15,13 +15,13 @@ static NSString *askStoryURLString = @"https://hacker-news.firebaseio.com/v0/ask
 static NSString *showStoryURLString = @"https://hacker-news.firebaseio.com/v0/showstories.json";
 static NSString *jobStoryURLString = @"https://hacker-news.firebaseio.com/v0/jobstories.json";
 
-@interface HackerNewsCommunicator()
+@interface HNCommunicator()
 - (void)fetchContentAtURL:(NSURL *)url errorHandler:(void(^)(NSError *error))errorBlock successHandler:(void(^)(NSString *objectNotation))successBlock;
 - (void)launchRequest:(NSURLRequest*)request;
 - (NSURL*)itemURLWithIdentifier:(NSInteger)itemID;
 @end
 
-@implementation HackerNewsCommunicator
+@implementation HNCommunicator
 
 @synthesize delegate;
 

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol HackerNewsCommunicatorDelegate <NSObject>
+@protocol HNCommunicatorDelegate <NSObject>
 
 @optional
 - (void)communicatorItemFetchFailedWithError:(NSError*)error;

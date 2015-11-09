@@ -6,8 +6,8 @@
 //  Copyright © 2015 Skye Freeman. All rights reserved.
 //
 
-#import "HackerNewsCommunicator.h"
+#import "HNCommunicator.h"
 
-@interface NonNetworkedHackerNewsCommunicator : HackerNewsCommunicator
+@interface NonNetworkedHackerNewsCommunicator : HNCommunicator
 @property (copy) NSData *receivedData;
 @end

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 @class HNItem;
 
-@protocol HackerNewsManagerDelegate <NSObject>
+@protocol HNManagerDelegate <NSObject>
 
 @required
 - (void)hackerNewsFetchFailedWithError:(NSError*)error;

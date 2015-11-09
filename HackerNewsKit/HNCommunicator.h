@@ -7,21 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HackerNewsCommunicatorDelegate.h"
+#import "HNCommunicatorDelegate.h"
 
-@interface HackerNewsCommunicator : NSObject <NSURLSessionDataDelegate> {
+@interface HNCommunicator : NSObject <NSURLSessionDataDelegate> {
 @protected
     NSURL *fetchingURL;
     NSURLSession *session;
     NSURLSessionDataTask *fetchingTask;
     NSMutableData *receivedData;
 @private
-    id <HackerNewsCommunicatorDelegate> __weak delegate;
+    id <HNCommunicatorDelegate> __weak delegate;
     void (^errorHandler)(NSError *);
     void (^successHandler)(NSString *);
 }
 
-@property (nonatomic, weak) id <HackerNewsCommunicatorDelegate> delegate;
+@property (nonatomic, weak) id <HNCommunicatorDelegate> delegate;
 
 - (void)fetchTopStories;
 - (void)fetchNewStories;
