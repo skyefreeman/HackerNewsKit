@@ -208,6 +208,9 @@
 		EED39B801BF143AA0032B543 /* HackerNewsRequestModel */ = {
 			isa = PBXGroup;
 			children = (
+				EED39B881BF143AA0032B543 /* HNManager.h */,
+				EED39B891BF143AA0032B543 /* HNManager.m */,
+				EED39B8A1BF143AA0032B543 /* HNManagerDelegate.h */,
 				EED39B811BF143AA0032B543 /* HNCommunicator.h */,
 				EED39B821BF143AA0032B543 /* HNCommunicator.m */,
 				EED39B831BF143AA0032B543 /* HNCommunicatorDelegate.h */,
@@ -215,9 +218,6 @@
 				EED39B851BF143AA0032B543 /* HNItem.m */,
 				EED39B861BF143AA0032B543 /* HNItemBuilder.h */,
 				EED39B871BF143AA0032B543 /* HNItemBuilder.m */,
-				EED39B881BF143AA0032B543 /* HNManager.h */,
-				EED39B891BF143AA0032B543 /* HNManager.m */,
-				EED39B8A1BF143AA0032B543 /* HNManagerDelegate.h */,
 			);
 			path = HackerNewsRequestModel;
 			sourceTree = "<group>";
