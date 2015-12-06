@@ -24,5 +24,4 @@
 - (void)recievedAskStoriesWithJSON:(NSString*)objectNotation;
 - (void)recievedShowStoriesWithJSON:(NSString*)objectNotation;
 - (void)recievedJobsStoriesWithJSON:(NSString*)objectNotation;
-
 @end
