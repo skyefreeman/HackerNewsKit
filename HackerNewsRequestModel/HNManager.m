@@ -97,6 +97,9 @@ NSInteger const kMaxFetchCount = 30;
     self.fetchStartIndex += kMaxFetchCount;
     
     switch (self.lastFetchType) {
+        case HNFetchTypeNone:
+            break;
+            
         case HNFetchTypeTopStories: {
             [self recievedTopStoriesWithJSON:self.cachedItemJSON];
             break;

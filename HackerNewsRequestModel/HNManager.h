@@ -13,7 +13,8 @@
 #import "HNCommunicator.h"
 #import "HNItemBuilder.h"
 
-typedef NS_ENUM(NSInteger, HNFetchType) {
+typedef NS_ENUM(NSUInteger, HNFetchType) {
+    HNFetchTypeNone = 0,
     HNFetchTypeTopStories,
     HNFetchTypeNewStories,
     HNFetchTypeAskStories,
