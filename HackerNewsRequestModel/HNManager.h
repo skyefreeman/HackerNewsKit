@@ -13,15 +13,6 @@
 #import "HNCommunicator.h"
 #import "HNItemBuilder.h"
 
-typedef NS_ENUM(NSUInteger, HNFetchType) {
-    HNFetchTypeNone = 0,
-    HNFetchTypeTopStories,
-    HNFetchTypeNewStories,
-    HNFetchTypeAskStories,
-    HNFetchTypeShowStories,
-    HNFetchTypeJobStories,
-};
-
 @interface HNManager : NSObject <HNCommunicatorDelegate>
 
 @property (nonatomic, weak) id <HNManagerDelegate> delegate;
@@ -31,9 +22,6 @@ typedef NS_ENUM(NSUInteger, HNFetchType) {
 
 /** @brief Take's Hacker News Items and builds HNItems. */
 @property (strong) HNItemBuilder *itemBuilder;
-
-/** @brief The type of the last performed request. */
-@property (nonatomic) HNFetchType lastFetchType;
 
 /**
  * @brief Perform a request for a single HNItem, the delegate is notified when the request completes.
@@ -65,6 +53,11 @@ typedef NS_ENUM(NSUInteger, HNFetchType) {
  * @brief Perform a job story request for an NSArray of HNItems, the delegate is notified when the request completes.
  */
 - (void)fetchJobStories;
+
+/**
+ * @brief Performs a request of the last request type, the delegate is notified when the request completes.
+ */
+- (void)refreshLastStories;
 
 /**
  * @brief Performs a request of the last request type, retrieving the next 30 items, the delegate is notified when the request completes.

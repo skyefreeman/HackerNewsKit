@@ -15,11 +15,21 @@
 NSString *HackerNewsManagerError = @"HackerNewsManagerError";
 NSInteger const kMaxFetchCount = 30;
 
+typedef NS_ENUM(NSUInteger, HNFetchType) {
+    HNFetchTypeNone = 0,
+    HNFetchTypeTopStories,
+    HNFetchTypeNewStories,
+    HNFetchTypeAskStories,
+    HNFetchTypeShowStories,
+    HNFetchTypeJobStories,
+};
+
 @interface HNManager()
 
 // Cached Properties
 @property (nonatomic, copy) NSString *cachedItemJSON;
 @property (nonatomic) NSInteger fetchStartIndex;
+@property (nonatomic) HNFetchType lastFetchType;
 
 // Fetching Queued Items
 - (void)getItemsForItemIdentifiers:(NSArray*)itemIDs withSuccess:(void (^)(NSArray *))completion;
@@ -86,6 +96,35 @@ NSInteger const kMaxFetchCount = 30;
 - (void)fetchJobStories {
     self.lastFetchType = HNFetchTypeJobStories;
     [self.communicator fetchJobStories];
+}
+
+- (void)refreshLastStories {
+    switch (self.lastFetchType) {
+        case HNFetchTypeNone: {
+            NSLog(@"Can't refresh without a previous fetch.");
+            break;
+        }
+        case HNFetchTypeTopStories: {
+            [self fetchTopStories];
+            break;
+        }
+        case HNFetchTypeNewStories: {
+            [self fetchNewStories];
+            break;
+        }
+        case HNFetchTypeAskStories: {
+            [self fetchAskStories];
+            break;
+        }
+        case HNFetchTypeShowStories: {
+            [self fetchShowStories];
+            break;
+        }
+        case HNFetchTypeJobStories: {
+            [self fetchJobStories];
+            break;
+        }
+    }
 }
 
 - (void)fetchNextStories {

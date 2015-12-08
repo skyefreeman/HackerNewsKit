@@ -31,6 +31,7 @@
 
 - (void)didReceiveTopStories:(NSArray *)topStories {
     NSLog(@"%@",topStories);
+    [self.manager refreshLastStories];
 }
 
 - (void)didReceiveAskStories:(NSArray *)askStories {
