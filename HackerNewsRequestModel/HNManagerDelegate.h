@@ -21,5 +21,4 @@
 - (void)didReceiveShowStories:(NSArray*)showStories;
 - (void)didReceiveJobStories:(NSArray*)jobStories;
 - (void)didReceiveItem:(HNItem*)item;
-
 @end

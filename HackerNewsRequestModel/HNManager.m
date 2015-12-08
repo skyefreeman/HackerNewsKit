@@ -15,19 +15,10 @@
 NSString *HackerNewsManagerError = @"HackerNewsManagerError";
 NSInteger const kMaxFetchCount = 30;
 
-typedef NS_ENUM(NSInteger, ItemFetchType) {
-    ItemFetchTypeTopStories,
-    ItemFetchTypeNewStories,
-    ItemFetchTypeAskStories,
-    ItemFetchTypeShowStories,
-    ItemFetchTypeJobStories,
-};
-
-@interface HNManager ()
+@interface HNManager()
 
 // Cached Properties
 @property (nonatomic, copy) NSString *cachedItemJSON;
-@property (nonatomic) ItemFetchType cachedItemFetchType;
 @property (nonatomic) NSInteger fetchStartIndex;
 
 // Fetching Queued Items
@@ -73,27 +64,27 @@ typedef NS_ENUM(NSInteger, ItemFetchType) {
 }
 
 - (void)fetchTopStories {
-    self.cachedItemFetchType = ItemFetchTypeTopStories;
+    self.lastFetchType = HNFetchTypeTopStories;
     [self.communicator fetchTopStories];
 }
 
 - (void)fetchNewStories {
-    self.cachedItemFetchType = ItemFetchTypeNewStories;
+    self.lastFetchType = HNFetchTypeNewStories;
     [self.communicator fetchNewStories];
 }
 
 - (void)fetchAskStories {
-    self.cachedItemFetchType = ItemFetchTypeAskStories;
+    self.lastFetchType = HNFetchTypeAskStories;
     [self.communicator fetchAskStories];
 }
 
 - (void)fetchShowStories {
-    self.cachedItemFetchType = ItemFetchTypeShowStories;
+    self.lastFetchType = HNFetchTypeShowStories;
     [self.communicator fetchShowStories];
 }
 
 - (void)fetchJobStories {
-    self.cachedItemFetchType = ItemFetchTypeJobStories;
+    self.lastFetchType = HNFetchTypeJobStories;
     [self.communicator fetchJobStories];
 }
 
@@ -105,24 +96,24 @@ typedef NS_ENUM(NSInteger, ItemFetchType) {
     
     self.fetchStartIndex += kMaxFetchCount;
     
-    switch (self.cachedItemFetchType) {
-        case ItemFetchTypeTopStories: {
+    switch (self.lastFetchType) {
+        case HNFetchTypeTopStories: {
             [self recievedTopStoriesWithJSON:self.cachedItemJSON];
             break;
         }
-        case ItemFetchTypeNewStories: {
+        case HNFetchTypeNewStories: {
             [self recievedNewStoriesWithJSON:self.cachedItemJSON];
             break;
         }
-        case ItemFetchTypeAskStories: {
+        case HNFetchTypeAskStories: {
             [self recievedAskStoriesWithJSON:self.cachedItemJSON];
             break;
         }
-        case ItemFetchTypeShowStories: {
+        case HNFetchTypeShowStories: {
             [self recievedShowStoriesWithJSON:self.cachedItemJSON];
             break;
         }
-        case ItemFetchTypeJobStories: {
+        case HNFetchTypeJobStories: {
             [self recievedJobsStoriesWithJSON:self.cachedItemJSON];
             break;
         }
@@ -130,7 +121,7 @@ typedef NS_ENUM(NSInteger, ItemFetchType) {
 }
 
 #pragma mark - Setter Override
-- (void)setCachedItemFetchType:(ItemFetchType)cachedItemFetchType {
+- (void)setLastFetchType:(HNFetchType)cachedItemFetchType {
     self.fetchStartIndex = 0;
 }
 

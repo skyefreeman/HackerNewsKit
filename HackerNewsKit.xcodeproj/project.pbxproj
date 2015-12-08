@@ -143,22 +143,14 @@
 			isa = PBXGroup;
 			children = (
 				EED00BEE1BC5B8A2004C3151 /* Mocks + Fakes + Stubs */,
-				EED00BED1BC5B89D004C3151 /* Tests */,
-				EE2643A41BC32562002C4F8A /* Info.plist */,
-			);
-			path = HackerNewsKitTests;
-			sourceTree = "<group>";
-		};
-		EED00BED1BC5B89D004C3151 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
 				EE2643AE1BC32824002C4F8A /* HNItemTests.m */,
 				EED00BE51BC5B153004C3151 /* HNItemCreationWorkflowTests.m */,
 				EED00C051BC82FE9004C3151 /* HNItemBuilderTests.m */,
 				EED00C091BC9B17A004C3151 /* HackerNewsCommunicatorTests.m */,
 				EE3A12001BD893A900F56E1B /* HackerNewsManagerTests.m */,
+				EE2643A41BC32562002C4F8A /* Info.plist */,
 			);
-			name = Tests;
+			path = HackerNewsKitTests;
 			sourceTree = "<group>";
 		};
 		EED00BEE1BC5B8A2004C3151 /* Mocks + Fakes + Stubs */ = {
