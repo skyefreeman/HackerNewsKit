@@ -7,6 +7,7 @@
 //
 
 #import "MockHackerNewsCommunicator.h"
+#import "HNItem.h"
 
 @implementation MockHackerNewsCommunicator
 {
@@ -31,5 +32,6 @@
 - (void)fetchItemForIdentifier:(NSInteger)identifier {
     wasAskedToFetchItem = YES;
 }
+
 
 @end

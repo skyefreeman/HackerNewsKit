@@ -8,8 +8,14 @@
 
 #import "HNManager.h"
 
+// Communicator
+#import "HNCommunicator.h"
+
 // Builders
 #import "HNItemBuilder.h"
+
+// Models
+#import "HNItem.h"
 
 // Constants
 NSString *HackerNewsManagerError = @"HackerNewsManagerError";
@@ -71,6 +77,12 @@ typedef NS_ENUM(NSUInteger, HNFetchType) {
 #pragma mark - Stories
 - (void)fetchItemForIdentifier:(NSInteger)identifier {
     [self.communicator fetchItemForIdentifier:identifier];
+}
+
+- (void)fetchCommentsForItem:(HNItem*)item {
+    [self getItemsForItemIdentifiers:item.kids withSuccess:^(NSArray *itemObjects) {
+        [self.delegate didReceiveItemComments:itemObjects];
+    }];
 }
 
 - (void)fetchTopStories {
@@ -245,6 +257,7 @@ typedef NS_ENUM(NSUInteger, HNFetchType) {
     NSInteger fetchCount = (remainingItemIDs > kMaxFetchCount) ? kMaxFetchCount : fetchableItemCount;
     
     [self performItemRequestsWithItemIdentifiers:itemIDs withCount:fetchCount startIndex:_fetchStartIndex withCompletion:^(NSArray *itemObjects) {
+        NSLog(@"%@",itemObjects);
         NSError *error = nil;
         NSArray *builtItems = [_itemBuilder itemsFromJSONArray:itemObjects error:&error];
         if (!builtItems) {

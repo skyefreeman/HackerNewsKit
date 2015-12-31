@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "HNManager.h"
+#import "HNCommunicator.h"
 
 @interface HackerNewsManagerTests : XCTestCase
 @end

@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "HNManagerDelegate.h"
 #import "HNCommunicatorDelegate.h"
 
-#import "HNCommunicator.h"
-#import "HNItemBuilder.h"
+@class HNCommunicator;
+@class HNItemBuilder;
 
 @interface HNManager : NSObject <HNCommunicatorDelegate>
 
@@ -28,6 +29,12 @@
  * @param identifier The Identifier number of a Hacker News Item.
  */
 - (void)fetchItemForIdentifier:(NSInteger)identifier;
+
+/**
+ * @brief Performs a request retrieving all child HNItems of the passed in HNItem.
+ * @param item The Hacker News Item to retrieve children items from.
+ */
+- (void)fetchCommentsForItem:(HNItem*)item;
 
 /**
  * @brief Perform a top story request for an NSArray of HNItems, the delegate is notified when the request completes.

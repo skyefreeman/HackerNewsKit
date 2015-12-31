@@ -31,7 +31,7 @@
 
 - (void)didReceiveTopStories:(NSArray *)topStories {
     NSLog(@"%@",topStories);
-    [self.manager refreshLastStories];
+    [self.manager fetchCommentsForItem:[topStories firstObject]];
 }
 
 - (void)didReceiveAskStories:(NSArray *)askStories {
@@ -48,6 +48,11 @@
 
 - (void)didReceiveShowStories:(NSArray *)showStories {
     NSLog(@"%@",showStories);
+}
+
+- (void)didReceiveItemComments:(NSArray *)commentItems {
+    NSLog(@"%@",commentItems);
+    [self.manager fetchNextStories];
 }
 
 - (void)hackerNewsFetchFailedWithError:(NSError *)error {

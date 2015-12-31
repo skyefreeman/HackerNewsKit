@@ -20,5 +20,6 @@
 - (void)didReceiveAskStories:(NSArray*)askStories;
 - (void)didReceiveShowStories:(NSArray*)showStories;
 - (void)didReceiveJobStories:(NSArray*)jobStories;
+- (void)didReceiveItemComments:(NSArray*)commentItems;
 - (void)didReceiveItem:(HNItem*)item;
 @end
