@@ -35,7 +35,7 @@ typedef NS_ENUM(NSUInteger, HNFetchType) {
 // Cached Properties
 @property (nonatomic, copy) NSString *cachedItemJSON;
 @property (nonatomic) NSInteger fetchStartIndex;
-@property (nonatomic) HNFetchType lastFetchType;
+@property (nonatomic, assign) HNFetchType lastFetchType;
 
 // Fetching Queued Items
 - (void)getItemsForItemIdentifiers:(NSArray*)itemIDs withSuccess:(void (^)(NSArray *))completion;
@@ -54,6 +54,10 @@ typedef NS_ENUM(NSUInteger, HNFetchType) {
 @end
 
 @implementation HNManager
+
+- (NSInteger)getFetchType {
+    return self.lastFetchType;
+}
 
 - (instancetype)init {
     self = [super init];
@@ -112,30 +116,28 @@ typedef NS_ENUM(NSUInteger, HNFetchType) {
 
 - (void)refreshLastStories {
     switch (self.lastFetchType) {
-        case HNFetchTypeNone: {
-            NSLog(@"Can't refresh without a previous fetch.");
+        case HNFetchTypeNone:
             break;
-        }
-        case HNFetchTypeTopStories: {
+            
+        case HNFetchTypeTopStories:
             [self fetchTopStories];
             break;
-        }
-        case HNFetchTypeNewStories: {
+            
+        case HNFetchTypeNewStories:
             [self fetchNewStories];
             break;
-        }
-        case HNFetchTypeAskStories: {
+            
+        case HNFetchTypeAskStories:
             [self fetchAskStories];
             break;
-        }
-        case HNFetchTypeShowStories: {
+            
+        case HNFetchTypeShowStories:
             [self fetchShowStories];
             break;
-        }
-        case HNFetchTypeJobStories: {
+            
+        case HNFetchTypeJobStories:
             [self fetchJobStories];
             break;
-        }
     }
 }
 
@@ -176,6 +178,7 @@ typedef NS_ENUM(NSUInteger, HNFetchType) {
 
 #pragma mark - Setter Override
 - (void)setLastFetchType:(HNFetchType)cachedItemFetchType {
+    _lastFetchType = cachedItemFetchType;
     self.fetchStartIndex = 0;
 }
 
@@ -257,7 +260,6 @@ typedef NS_ENUM(NSUInteger, HNFetchType) {
     NSInteger fetchCount = (remainingItemIDs > kMaxFetchCount) ? kMaxFetchCount : fetchableItemCount;
     
     [self performItemRequestsWithItemIdentifiers:itemIDs withCount:fetchCount startIndex:_fetchStartIndex withCompletion:^(NSArray *itemObjects) {
-        NSLog(@"%@",itemObjects);
         NSError *error = nil;
         NSArray *builtItems = [_itemBuilder itemsFromJSONArray:itemObjects error:&error];
         if (!builtItems) {
