@@ -24,7 +24,7 @@ NSString * ItemBuilderErrorDomain = @"ItemBuilderErrorDomain";
     for (NSString *itemJson in itemArray) {
         NSError *itemError = nil;
         HNItem *newItem = [self itemFromJSON:itemJson error:&itemError];
-        [tempItems addObject:newItem];
+        if (newItem)[tempItems addObject:newItem];
     }
     
     return [NSArray arrayWithArray:tempItems];
@@ -77,6 +77,8 @@ NSString * ItemBuilderErrorDomain = @"ItemBuilderErrorDomain";
 }
 
 - (NSDictionary*)dictionaryForJSON:(NSString*)objectNotation {
+    if (![objectNotation isKindOfClass:[NSString class]]) return nil;
+    
     NSData *unicodeNotation = [objectNotation dataUsingEncoding:NSUTF8StringEncoding];
     NSError *localError = nil;
     NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:unicodeNotation options:0 error:&localError];

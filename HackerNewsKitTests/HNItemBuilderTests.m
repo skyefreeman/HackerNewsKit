@@ -112,4 +112,10 @@ static NSString *storyJSONString = @"{"
     XCTAssertEqual(itemArray.count, jsonArray.count, @"Two JSON items should be parsed into two HN Items");
 }
 
+- (void)testPassingNilJSONObjectDoesNotBuildNilHNItem {
+    NSError *error = nil;
+    NSArray *array = [itemBuilder itemsFromJSONArray:@[[NSNull null]] error:&error];
+    XCTAssertTrue(array.count == 0,  @"Built array created an HNItem when it should not have");
+}
+
 @end

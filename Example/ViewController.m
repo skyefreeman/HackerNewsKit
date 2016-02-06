@@ -21,7 +21,7 @@
     self.manager = [[HNManager alloc] init];
     self.manager.delegate = self;
     
-    [self.manager fetchTopStories];
+    [self.manager fetchJobStories];
 }
 
 #pragma mark - HackerNewsManager Delegate
