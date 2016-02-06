@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 s.name         = "HackerNewsKit"
-s.version      = "1.01"
+s.version      = "1.02"
 s.summary      = "An Objective-C wrapper for the Hacker News API"
 s.description  = <<-DESC
 HackerNewsKit is an unofficial iOS API for Hacker News.  It comes with no dependancies, making all communication using NSURLSession.
@@ -19,7 +19,7 @@ s.license      = { :type => "MIT", :file => "LICENSE" }
 s.author             = { "Skye Freeman" => "skyefreeman@icloud.com" }
 s.social_media_url   = "http://twitter.com/ImSkyeFreeman"
 s.platform     = :ios
-s.source       = { :git => "https://github.com/skyefreeman/HackerNewsKit.git", :tag => "1.01" }
+s.source       = { :git => "https://github.com/skyefreeman/HackerNewsKit.git", :tag => "1.02" }
 s.source_files  = "HackerNewsRequestModel/*.{h,m}", "HackerNewsKit.h"
 s.public_header_files = "*.h"
 s.requires_arc = true
