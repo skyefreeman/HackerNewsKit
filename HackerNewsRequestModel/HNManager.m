@@ -55,9 +55,6 @@ typedef NS_ENUM(NSUInteger, HNFetchType) {
 
 @implementation HNManager
 
-- (NSInteger)getFetchType {
-    return self.lastFetchType;
-}
 
 - (instancetype)init {
     self = [super init];
@@ -284,6 +281,7 @@ typedef NS_ENUM(NSUInteger, HNFetchType) {
         HNCommunicator *communicator = [[HNCommunicator alloc] init];
         [communicator fetchItemForIdentifier:[IDString integerValue] completion:^(NSString *objectNotation, NSError *error) {
             if (objectNotation) {
+                
                 [itemObjects addObject:objectNotation];
             }
             dispatch_group_leave(group);
@@ -291,7 +289,7 @@ typedef NS_ENUM(NSUInteger, HNFetchType) {
     }
 
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        if (completion) completion([NSArray arrayWithArray:itemObjects]);
+        if (completion) completion(itemObjects);
     });
 }
 

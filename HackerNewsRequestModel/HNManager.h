@@ -71,8 +71,6 @@
  */
 - (void)fetchNextStories;
 
-- (NSInteger)getFetchType;
-
 @end
 
 extern NSString *HackerNewsManagerError;
