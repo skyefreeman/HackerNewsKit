@@ -14,6 +14,9 @@
 // Builders
 #import "HNItemBuilder.h"
 
+// Helpers
+#import "HNSortHelper.h"
+
 // Models
 #import "HNItem.h"
 
@@ -258,11 +261,24 @@ typedef NS_ENUM(NSUInteger, HNFetchType) {
     
     [self performItemRequestsWithItemIdentifiers:itemIDs withCount:fetchCount startIndex:_fetchStartIndex withCompletion:^(NSArray *itemObjects) {
         NSError *error = nil;
+
+        // Turns json into HNItem objects
         NSArray *builtItems = [_itemBuilder itemsFromJSONArray:itemObjects error:&error];
-        if (!builtItems) {
+        
+        // Sort HNItems to fix mismatched request completions
+        // If FetchType is 'New', then sort by time, else sort to match identifiers
+        
+        NSArray *sortedBuiltItems;
+        if (self.lastFetchType == HNFetchTypeNewStories) {
+            sortedBuiltItems = [HNSortHelper sortHNItems:builtItems];
+        } else {
+            sortedBuiltItems = [HNSortHelper sortHNItems:builtItems toMatchIdentifiers:itemIDs];
+        }
+        
+        if (!sortedBuiltItems) {
             [self tellDelegateAboutFetchError:error];
         } else {
-            if (successHandler) successHandler(builtItems);
+            if (successHandler) successHandler(sortedBuiltItems);
         }
     }];
 }
@@ -281,7 +297,6 @@ typedef NS_ENUM(NSUInteger, HNFetchType) {
         HNCommunicator *communicator = [[HNCommunicator alloc] init];
         [communicator fetchItemForIdentifier:[IDString integerValue] completion:^(NSString *objectNotation, NSError *error) {
             if (objectNotation) {
-                
                 [itemObjects addObject:objectNotation];
             }
             dispatch_group_leave(group);

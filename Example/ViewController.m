@@ -21,7 +21,9 @@
     self.manager = [[HNManager alloc] init];
     self.manager.delegate = self;
     
-    [self.manager fetchJobStories];
+    [self.manager fetchTopStories];
+//    [self.manager fetchNewStories];
+//    [self.manager fetchJobStories];
 }
 
 #pragma mark - HackerNewsManager Delegate
@@ -30,8 +32,11 @@
 }
 
 - (void)didReceiveTopStories:(NSArray *)topStories {
+    for (HNItem *item in topStories) {
+        NSLog(@"%@",item.title);
+    }
+    
     NSLog(@"%@",topStories);
-    [self.manager fetchCommentsForItem:[topStories firstObject]];
 }
 
 - (void)didReceiveAskStories:(NSArray *)askStories {
@@ -43,6 +48,10 @@
 }
 
 - (void)didReceiveNewStories:(NSArray *)newStories {
+    for (HNItem *item in newStories) {
+        NSLog(@"%@",item.title);
+    }
+    
     NSLog(@"%@",newStories);
 }
 
